@@ -1,6 +1,6 @@
 # Umadle 🐎
 
-**Umadle** é um jogo de adivinhação diário (estilo Wordle e Loldle) focado no universo de **Uma Musume: Pretty Derby**. O objetivo é deduzir a personagem ou a carta de suporte correta do dia usando dicas e atributos!
+**Umadle** é um jogo de adivinhação diário  focado no universo de **Uma Musume: Pretty Derby**. O objetivo é deduzir a personagem ou a carta de suporte correta do dia usando dicas e atributos!
 
 ![Umadle Preview](https://gametora.com/images/umamusume/characters/icons/chr_icon_1001.png)
 
