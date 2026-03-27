@@ -30,6 +30,18 @@ const MODE_CONFIGS = {
             { key: 'type', label: 'Type', icon: '🏷️' },
             { key: 'releaseYear', label: 'Release Year', icon: '📅' }
         ]
+    },
+    'emoji': {
+        file: 'database_emojis.json',
+        columns: []
+    },
+    'splash': {
+        file: 'database_splash.json',
+        columns: []
+    },
+    'splash': {
+        file: 'database_splash.json',
+        columns: []
     }
 };
 
@@ -47,6 +59,9 @@ const tableBody = document.getElementById('table-body');
 const resultBox = document.getElementById('result-box');
 const toastEl = document.getElementById('toast');
 const modeBtns = document.querySelectorAll('.mode-btn');
+const modeHint = document.getElementById('mode-hint');
+const splashContainer = document.getElementById('splash-container');
+const splashImg = document.getElementById('splash-img');
 
 /* ==================================
    PRNG & DAILY SEED
@@ -107,7 +122,18 @@ const loadModeConfig = async () => {
 
 const setupTableHeaders = () => {
     const thead = tableWrapper.querySelector('thead tr');
-    thead.innerHTML = `<th>Name</th>` + COLUMNS.map(c => `<th>${c.label}</th>`).join('');
+    // Para modos sem colunas, só deixa o Header vazio ou oculto
+    thead.innerHTML = COLUMNS.length > 0 ? `<th>Name</th>` + COLUMNS.map(c => `<th>${c.label}</th>`).join('') : '';
+};
+
+const updateSplashZoom = () => {
+    if (currentMode !== 'splash' || !answer) return;
+    const baseScale = 5;
+    let currentScale = Math.max(1, baseScale - guesses.length);
+    if (isGameOver) currentScale = 1; // Mostra tudo se perder ou ganhar
+
+    splashImg.style.transform = `scale(${currentScale})`;
+    splashImg.style.transformOrigin = `${answer.originX}% ${answer.originY}%`;
 };
 
 const initGame = () => {
@@ -123,6 +149,22 @@ const initGame = () => {
     resultBox.innerHTML = '';
     tableWrapper.style.display = 'none';
 
+    // Atualiza a dica visual (No modo Emoji ela aparece gigante em cima do input)
+    if (currentMode === 'emoji') {
+        modeHint.style.display = 'block';
+        modeHint.textContent = answer.emojis;
+        splashContainer.style.display = 'none';
+    } else if (currentMode === 'splash') {
+        modeHint.style.display = 'none';
+        splashContainer.style.display = 'block';
+        splashImg.src = answer.splashUrl;
+        updateSplashZoom();
+    } else {
+        modeHint.style.display = 'none';
+        modeHint.textContent = '';
+        splashContainer.style.display = 'none';
+    }
+
     searchInput.value = '';
     searchInput.disabled = false;
     searchBtn.disabled = false;
@@ -135,7 +177,9 @@ const initGame = () => {
         if (guesses.length > 0) {
             tableWrapper.style.display = 'block';
             guesses.forEach(g => renderRow(g, true)); // instant render
-
+            
+            if (currentMode === 'splash') updateSplashZoom();
+            
             if (guesses.some(g => g.name === answer.name)) {
                 endGame(true, true);
             }
@@ -264,6 +308,8 @@ function submitGuess() {
 
     guesses.push(guessedItem);
     saveProgress();
+    
+    if (currentMode === 'splash') updateSplashZoom();
 
     tableWrapper.style.display = 'block';
     renderRow(guessedItem, false);
@@ -361,6 +407,8 @@ const endGame = (isWin, instant) => {
     searchBtn.disabled = true;
 
     const ModeName = currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
+
+    if (currentMode === 'splash') updateSplashZoom(); // Revela a imagem original
 
     if (isWin) {
         resultBox.innerHTML = `

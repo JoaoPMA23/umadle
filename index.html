@@ -25,9 +25,9 @@
             <nav class="mode-nav" id="mode-nav">
                 <button class="mode-btn active" data-mode="classic">Classic</button>
                 <button class="mode-btn" data-mode="support">Support</button>
-                <button class="mode-btn disabled" data-mode="splash">Splash</button>
+                <button class="mode-btn" data-mode="splash">Splash</button>
                 <button class="mode-btn disabled" data-mode="quote">Quote</button>
-                <button class="mode-btn disabled" data-mode="emoji">Emoji</button>
+                <button class="mode-btn" data-mode="emoji">Emoji</button>
             </nav>
             <div class="header-right">
                 <button class="icon-btn" title="Settings">⚙️</button>
@@ -42,6 +42,16 @@
         <p style="text-align:center;color:var(--text-muted);font-size:0.83rem;margin-bottom:14px">
             Guess the Uma Musume!
         </p>
+
+        <!-- Container de Emojis do Modo Específico -->
+        <div id="mode-hint"
+            style="display:none; font-size: 2.7rem; text-align: center; margin-bottom: 24px; letter-spacing: 8px;">
+        </div>
+
+        <!-- Container de Splash (Arte) do Modo Específico -->
+        <div id="splash-container" style="display:none; width: 260px; height: 260px; margin: 0 auto 24px; overflow: hidden; border-radius: 12px; border: 2px solid var(--input-border); position: relative; background: #000;">
+            <img id="splash-img" src="" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);">
+        </div>
 
         <!-- Container principal de input -->
         <div class="search-wrapper">

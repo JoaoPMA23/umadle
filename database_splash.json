@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Special Week",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10001.png",
+        "originX": 50,
+        "originY": 25,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1001.png"
+    },
+    {
+        "name": "Silence Suzuka",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10003.png",
+        "originX": 60,
+        "originY": 20,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1002.png"
+    },
+    {
+        "name": "Tokai Teio",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10002.png",
+        "originX": 45,
+        "originY": 30,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1003.png"
+    },
+    {
+        "name": "Gold Ship",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10005.png",
+        "originX": 55,
+        "originY": 15,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1007.png"
+    },
+    {
+        "name": "Vodka",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10006.png",
+        "originX": 48,
+        "originY": 28,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1008.png"
+    },
+    {
+        "name": "Daiwa Scarlet",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10009.png",
+        "originX": 50,
+        "originY": 35,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1009.png"
+    },
+    {
+        "name": "Symboli Rudolf",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10016.png",
+        "originX": 50,
+        "originY": 10,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1017.png"
+    },
+    {
+        "name": "Mejiro McQueen",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10014.png",
+        "originX": 50,
+        "originY": 20,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1013.png"
+    },
+    {
+        "name": "Kitasan Black",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10041.png",
+        "originX": 50,
+        "originY": 40,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1068.png"
+    },
+    {
+        "name": "Satono Diamond",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10042.png",
+        "originX": 40,
+        "originY": 40,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1067.png"
+    },
+    {
+        "name": "Fine Motion",
+        "splashUrl": "https://gametora.com/images/umamusume/support_cards/card_10010.png",
+        "originX": 50,
+        "originY": 15,
+        "imageUrl": "https://gametora.com/images/umamusume/characters/icons/chr_icon_1022.png"
+    }
+]
