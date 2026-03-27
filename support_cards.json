@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Welcome to the Tresen Academy!",
+        "character": "Hayakawa Tazuna",
+        "rarity": "SSR",
+        "type": "Friend",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10001.png"
+    },
+    {
+        "name": "A Resounding Fanfare",
+        "character": "Tokai Teio",
+        "rarity": "SSR",
+        "type": "Speed",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10002.png"
+    },
+    {
+        "name": "Run with Me!",
+        "character": "Silence Suzuka",
+        "rarity": "SSR",
+        "type": "Speed",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10003.png"
+    },
+    {
+        "name": "Unsinkable Ship",
+        "character": "Gold Ship",
+        "rarity": "SSR",
+        "type": "Stamina",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10005.png"
+    },
+    {
+        "name": "7 cm Beyond",
+        "character": "Vodka",
+        "rarity": "SSR",
+        "type": "Power",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10006.png"
+    },
+    {
+        "name": "Dear My Twin",
+        "character": "Biwa Hayahide",
+        "rarity": "SSR",
+        "type": "Intelligence",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10008.png"
+    },
+    {
+        "name": "To You, From Your Devoted Servant",
+        "character": "Fine Motion",
+        "rarity": "SSR",
+        "type": "Intelligence",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10010.png"
+    },
+    {
+        "name": "Approaching Heat",
+        "character": "Kitasan Black",
+        "rarity": "SSR",
+        "type": "Speed",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10041.png"
+    },
+    {
+        "name": "Its Name is Meaningless",
+        "character": "Satono Diamond",
+        "rarity": "SSR",
+        "type": "Stamina",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10042.png"
+    },
+    {
+        "name": "Pushed by Passion",
+        "character": "Narita Top Road",
+        "rarity": "SSR",
+        "type": "Speed",
+        "releaseYear": 2022,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10065.png"
+    },
+    {
+        "name": "The One I Want to Catch Up To",
+        "character": "Symboli Rudolf",
+        "rarity": "SSR",
+        "type": "Stamina",
+        "releaseYear": 2023,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10016.png"
+    },
+    {
+        "name": "A Single Drop of Brilliance",
+        "character": "Seiun Sky",
+        "rarity": "SSR",
+        "type": "Stamina",
+        "releaseYear": 2021,
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10020.png"
+    }
+]

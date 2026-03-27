@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>UMADLE</title>
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&family=Nunito:wght@400;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Link para a folha de estilos extraída -->
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="icon-btn" title="Stats">📊</button>
+            </div>
+            <nav class="mode-nav" id="mode-nav">
+                <button class="mode-btn active" data-mode="classic">Classic</button>
+                <button class="mode-btn" data-mode="support">Support</button>
+                <button class="mode-btn disabled" data-mode="splash">Splash</button>
+                <button class="mode-btn disabled" data-mode="quote">Quote</button>
+                <button class="mode-btn disabled" data-mode="emoji">Emoji</button>
+            </nav>
+            <div class="header-right">
+                <button class="icon-btn" title="Settings">⚙️</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrap">
+        <h1>UMADLE</h1>
+        <div class="sub">Uma Musume - Pretty Derby</div>
+        <div class="divider"></div>
+        <p style="text-align:center;color:var(--text-muted);font-size:0.83rem;margin-bottom:14px">
+            Guess the Uma Musume!
+        </p>
+
+        <!-- Container principal de input -->
+        <div class="search-wrapper">
+            <input id="search-input" placeholder="Type an Uma Musume's name..." autocomplete="off">
+            <button class="search-btn" id="search-btn" aria-label="Search">&#128269;</button>
+            <div class="dropdown" id="dropdown-menu" style="display:none"></div>
+        </div>
+
+        <!-- Legenda -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot correct"></div>Correct
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot partial"></div>Partial (Close)
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot wrong"></div>Wrong
+            </div>
+        </div>
+
+        <!-- Numerador de tentativas -->
+        <div class="counter" id="counter"></div>
+
+        <!-- Tabela do jogo (Aparece quando houver chutes) -->
+        <div class="table-wrapper" id="table-wrapper" style="display:none">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surface</th>
+                        <th>Distance</th>
+                        <th>Strategy</th>
+                        <th>Height</th>
+                        <th>G1 Wins</th>
+                        <th>Birth Year</th>
+                        <th>Release Year</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Modal de Resultado (Vitória ou Derrota) -->
+        <div id="result-box"></div>
+    </div>
+
+    <!-- Feedback Toast -->
+    <div id="toast" class="toast">Message</div>
+
+    <!-- Script separado extraído -->
+    <script src="script.js"></script>
+</body>
+
+</html>
