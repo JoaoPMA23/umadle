@@ -38,10 +38,6 @@ const MODE_CONFIGS = {
     'splash': {
         file: 'database_splash.json',
         columns: []
-    },
-    'splash': {
-        file: 'database_splash.json',
-        columns: []
     }
 };
 
@@ -101,6 +97,179 @@ const saveProgress = () => {
 };
 
 /* ==================================
+   STATS MANAGER
+================================== */
+const getStatsKey = () => `umadle_stats_${currentMode}`;
+
+const loadStats = () => {
+    const defaultStats = { played: 0, wins: 0, currentStreak: 0, maxStreak: 0, distribution: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0} };
+    const saved = localStorage.getItem(getStatsKey());
+    return saved ? JSON.parse(saved) : defaultStats;
+};
+
+const saveStatsObj = (stats) => {
+    localStorage.setItem(getStatsKey(), JSON.stringify(stats));
+};
+
+const updateStats = (isWin, numGuesses) => {
+    const stats = loadStats();
+    stats.played++;
+    if (isWin) {
+        stats.wins++;
+        stats.currentStreak++;
+        if (stats.currentStreak > stats.maxStreak) stats.maxStreak = stats.currentStreak;
+        stats.distribution[numGuesses] = (stats.distribution[numGuesses] || 0) + 1;
+    } else {
+        stats.currentStreak = 0;
+    }
+    saveStatsObj(stats);
+};
+
+const showStatsModal = () => {
+    const stats = loadStats();
+    document.getElementById('stats-mode-name').textContent = currentMode.toUpperCase();
+    document.getElementById('stat-played').textContent = stats.played;
+    document.getElementById('stat-winpct').textContent = stats.played > 0 ? Math.round((stats.wins / stats.played) * 100) : 0;
+    document.getElementById('stat-streak').textContent = stats.currentStreak;
+    document.getElementById('stat-maxstreak').textContent = stats.maxStreak;
+
+    // Calculando a maior barra para proporcionalidade
+    let maxDist = 0;
+    Object.values(stats.distribution).forEach(v => { if(v > maxDist) maxDist = v; });
+
+    let distHTML = '';
+    // Calcular quantas barras exibir (no mínimo 6, ou mais se o usuário acertou na 7ª, 8ª, etc)
+    let maxShown = 6;
+    Object.keys(stats.distribution).forEach(k => {
+        if (parseInt(k) > maxShown && stats.distribution[k] > 0) maxShown = parseInt(k);
+    });
+
+    for(let i=1; i<=maxShown; i++) {
+        const val = stats.distribution[i] || 0;
+        const wPct = maxDist > 0 ? Math.max(8, Math.round((val / maxDist) * 100)) : 8; // min 8% para ser visível
+        // Se este índice foi a vitória da partida atual, destacar a barra de verde
+        const isLastWin = (isGameOver && val > 0 && guesses.length === i && guesses[guesses.length-1]?.name === answer?.name);
+        
+        distHTML += `
+            <div class="dist-row">
+                <div class="dist-num">${i}</div>
+                <div class="dist-bar-container">
+                    <div class="dist-bar ${isLastWin ? 'active' : ''}" style="width: ${wPct}%">${val}</div>
+                </div>
+            </div>
+        `;
+    }
+    document.getElementById('stats-dist').innerHTML = distHTML;
+    document.getElementById('stats-modal').style.display = 'flex';
+};
+
+// Event Listeners dos Modais
+document.getElementById('stats-btn').addEventListener('click', showStatsModal);
+document.getElementById('stats-close').addEventListener('click', () => {
+    document.getElementById('stats-modal').style.display = 'none';
+});
+
+/* ==================================
+   SETTINGS MANAGER & TRANSLATIONS
+================================== */
+const TRANSLATIONS = {
+    'pt-br': {
+        'Surface': 'Superfície', 'Distance': 'Distância', 'Strategy': 'Estratégia', 'Height': 'Altura',
+        'G1 Wins': 'Vits. G1', 'Birth Year': 'Ano Nasc.', 'Release Year': 'Ano Lanç.', 'Character': 'Personagem',
+        'Rarity': 'Raridade', 'Type': 'Tipo', 'Name': 'Nome',
+        'subtitle': 'Adivinhe a Uma Musume!', 'placeholder': 'Digite o nome de uma Uma...',
+        'legend_correct': 'Correto', 'legend_partial': 'Quase (Perto)', 'legend_wrong': 'Errado',
+        'attempt': 'Tentativa', 'stats_title': 'ESTATÍSTICAS', 'stat_played': 'Jogadas', 'stat_winpct': '% Vit.',
+        'stat_streak': 'Seq. Atual', 'stat_maxstreak': 'Maior Seq.', 'stat_dist': 'DISTRIBUIÇÃO',
+        'settings_title': 'CONFIGURAÇÕES', 'set_theme': 'Tema', 'set_dark': 'Escuro', 'set_light': 'Claro',
+        'set_lang': 'Idioma', 'set_mute': 'Sons Mutados', 'win_title': 'Vitória no modo ',
+        'win_desc1': 'Você acertou em ', 'win_desc2_sg': ' tentativa!', 'win_desc2_pl': ' tentativas!',
+        'share_btn': 'Compartilhar 🔗', 'next_puzzle': 'Próximos desafios à meia-noite!'
+    },
+    'en': {
+        'subtitle': 'Guess the Uma Musume!', 'placeholder': "Type an Uma Musume's name...",
+        'legend_correct': 'Correct', 'legend_partial': 'Partial (Close)', 'legend_wrong': 'Wrong',
+        'attempt': 'Attempt', 'stats_title': 'STATISTICS', 'stat_played': 'Played', 'stat_winpct': 'Win %',
+        'stat_streak': 'Current Streak', 'stat_maxstreak': 'Max Streak', 'stat_dist': 'GUESS DISTRIBUTION',
+        'settings_title': 'SETTINGS', 'set_theme': 'Theme', 'set_dark': 'Dark', 'set_light': 'Light',
+        'set_lang': 'Language', 'set_mute': 'Mute Sounds', 'win_title': 'Victory on ',
+        'win_desc1': 'You guessed right in ', 'win_desc2_sg': ' attempt!', 'win_desc2_pl': ' attempts!',
+        'share_btn': 'Share 🔗', 'next_puzzle': 'Next puzzles at midnight!'
+    }
+};
+
+const getSettingsKey = () => `umadle_settings`;
+
+const loadSettings = () => {
+    const defaultSettings = { theme: 'dark', lang: 'en', mute: false };
+    const saved = localStorage.getItem(getSettingsKey());
+    return saved ? { ...defaultSettings, ...JSON.parse(saved) } : defaultSettings;
+};
+
+let settings = loadSettings();
+
+const saveSettingsObj = () => {
+    localStorage.setItem(getSettingsKey(), JSON.stringify(settings));
+};
+
+const t = (text) => {
+    const lang = settings.lang;
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][text]) {
+        return TRANSLATIONS[lang][text];
+    }
+    return text;
+};
+
+const applyTranslations = () => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        el.setAttribute('placeholder', t(key));
+    });
+    updateCounter(); // to update 'Attempt' text logic
+    
+    // Also re-render result box if game is over (so victory text updates instantly)
+    if (isGameOver) renderResultBox();
+};
+
+const applySettings = () => {
+    document.body.classList.toggle('light-theme', settings.theme === 'light');
+    setupTableHeaders(); 
+    applyTranslations();
+};
+
+const showSettingsModal = () => {
+    document.getElementById('theme-select').value = settings.theme;
+    document.getElementById('lang-select').value = settings.lang;
+    document.getElementById('mute-toggle').checked = settings.mute;
+    document.getElementById('settings-modal').style.display = 'flex';
+};
+
+// Event Listeners - Modal de Configurações
+document.getElementById('theme-select').addEventListener('change', (e) => {
+    settings.theme = e.target.value;
+    saveSettingsObj();
+    applySettings();
+});
+document.getElementById('lang-select').addEventListener('change', (e) => {
+    settings.lang = e.target.value;
+    saveSettingsObj();
+    applySettings();
+});
+document.getElementById('mute-toggle').addEventListener('change', (e) => {
+    settings.mute = e.target.checked;
+    saveSettingsObj();
+});
+
+document.getElementById('settings-btn').addEventListener('click', showSettingsModal);
+document.getElementById('settings-close').addEventListener('click', () => {
+    document.getElementById('settings-modal').style.display = 'none';
+});
+
+/* ==================================
    INITIALIZATION & DATA LOADING
 ================================== */
 
@@ -123,7 +292,7 @@ const loadModeConfig = async () => {
 const setupTableHeaders = () => {
     const thead = tableWrapper.querySelector('thead tr');
     // Para modos sem colunas, só deixa o Header vazio ou oculto
-    thead.innerHTML = COLUMNS.length > 0 ? `<th>Name</th>` + COLUMNS.map(c => `<th>${c.label}</th>`).join('') : '';
+    thead.innerHTML = COLUMNS.length > 0 ? `<th>${t('Name')}</th>` + COLUMNS.map(c => `<th>${t(c.label)}</th>`).join('') : '';
 };
 
 const updateSplashZoom = () => {
@@ -324,7 +493,7 @@ function submitGuess() {
 
 const updateCounter = () => {
     counterDiv.innerHTML = guesses.length
-        ? `Attempt <span>${guesses.length}</span>`
+        ? `${t('attempt')} <span>${guesses.length}</span>`
         : '';
 };
 
@@ -401,29 +570,42 @@ const renderRow = (guessedItem, instant) => {
     }
 };
 
+const renderResultBox = () => {
+    if (!isGameOver) return;
+    
+    const isWin = guesses.length > 0 && guesses[guesses.length - 1].name === answer.name;
+    const ModeName = currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
+
+    if (isWin) {
+        resultBox.innerHTML = `
+            <div class="result-box win">
+                <h2>${t('win_title')}${ModeName}!</h2>
+                <p>${t('win_desc1')}<strong style="color:var(--gold)">${guesses.length}</strong>${guesses.length > 1 ? t('win_desc2_pl') : t('win_desc2_sg')}</p>
+                <div class="answer-reveal">${answer.name}</div>
+                <div class="btn-container">
+                    <button class="action-btn secondary" onclick="shareResult()">${t('share_btn')}</button>
+                </div>
+                <p style="margin-top: 10px; font-size:0.8rem; color:var(--text-muted)">${t('next_puzzle')}</p>
+            </div>
+        `;
+    }
+};
+
 const endGame = (isWin, instant) => {
     isGameOver = true;
     searchInput.disabled = true;
     searchBtn.disabled = true;
 
-    const ModeName = currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
+    // Atualiza Stats (sem subir o instant loading da página)
+    if (!instant) {
+        updateStats(isWin, guesses.length);
+        // Exibe o painel de Stats automaticamente após 1.2 segundos da vitória/derrota
+        setTimeout(showStatsModal, 1200);
+    }
 
     if (currentMode === 'splash') updateSplashZoom(); // Revela a imagem original
 
-    if (isWin) {
-        resultBox.innerHTML = `
-            <div class="result-box win">
-                <h2>Victory on ${ModeName} Mode!</h2>
-                <p>You guessed right in <strong style="color:var(--gold)">${guesses.length}</strong> attempt${guesses.length > 1 ? 's' : ''}!</p>
-                <div class="answer-reveal">${answer.name}</div>
-                <div class="btn-container">
-                    <button class="action-btn secondary" onclick="shareResult()">Share 🔗</button>
-                    <!-- Sem botão de Play Again pois é diário agora! -->
-                </div>
-                <p style="margin-top: 10px; font-size:0.8rem; color:var(--text-muted)">Next puzzles at midnight!</p>
-            </div>
-        `;
-    }
+    renderResultBox();
 };
 
 window.shareResult = () => {
@@ -458,4 +640,5 @@ const showToast = (message) => {
 };
 
 // Start
+applySettings();
 loadModeConfig();

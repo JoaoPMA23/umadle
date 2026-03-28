@@ -20,7 +20,7 @@
     <header class="app-header">
         <div class="header-content">
             <div class="header-left">
-                <button class="icon-btn" title="Stats">📊</button>
+                <button class="icon-btn" title="Stats" id="stats-btn">📊</button>
             </div>
             <nav class="mode-nav" id="mode-nav">
                 <button class="mode-btn active" data-mode="classic">Classic</button>
@@ -30,7 +30,7 @@
                 <button class="mode-btn" data-mode="emoji">Emoji</button>
             </nav>
             <div class="header-right">
-                <button class="icon-btn" title="Settings">⚙️</button>
+                <button class="icon-btn" title="Settings" id="settings-btn">⚙️</button>
             </div>
         </div>
     </header>
@@ -39,7 +39,7 @@
         <h1>UMADLE</h1>
         <div class="sub">Uma Musume - Pretty Derby</div>
         <div class="divider"></div>
-        <p style="text-align:center;color:var(--text-muted);font-size:0.83rem;margin-bottom:14px">
+        <p style="text-align:center;color:var(--text-muted);font-size:0.83rem;margin-bottom:14px" data-i18n="subtitle">
             Guess the Uma Musume!
         </p>
 
@@ -55,7 +55,7 @@
 
         <!-- Container principal de input -->
         <div class="search-wrapper">
-            <input id="search-input" placeholder="Type an Uma Musume's name..." autocomplete="off">
+            <input id="search-input" data-i18n-ph="placeholder" placeholder="Type an Uma Musume's name..." autocomplete="off">
             <button class="search-btn" id="search-btn" aria-label="Search">&#128269;</button>
             <div class="dropdown" id="dropdown-menu" style="display:none"></div>
         </div>
@@ -63,13 +63,13 @@
         <!-- Legenda -->
         <div class="legend">
             <div class="legend-item">
-                <div class="legend-dot correct"></div>Correct
+                <div class="legend-dot correct"></div><span data-i18n="legend_correct">Correct</span>
             </div>
             <div class="legend-item">
-                <div class="legend-dot partial"></div>Partial (Close)
+                <div class="legend-dot partial"></div><span data-i18n="legend_partial">Partial (Close)</span>
             </div>
             <div class="legend-item">
-                <div class="legend-dot wrong"></div>Wrong
+                <div class="legend-dot wrong"></div><span data-i18n="legend_wrong">Wrong</span>
             </div>
         </div>
 
@@ -101,6 +101,70 @@
 
     <!-- Feedback Toast -->
     <div id="toast" class="toast">Message</div>
+
+    <!-- Modal de Estatísticas -->
+    <div id="stats-modal" class="modal-overlay" style="display:none">
+        <div class="modal-content">
+            <button class="modal-close" id="stats-close">&times;</button>
+            <h2><span data-i18n="stats_title">STATISTICS</span> (<span id="stats-mode-name"></span>)</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-num" id="stat-played">0</div>
+                    <div class="stat-label" data-i18n="stat_played">Played</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" id="stat-winpct">0</div>
+                    <div class="stat-label" data-i18n="stat_winpct">Win %</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" id="stat-streak">0</div>
+                    <div class="stat-label" data-i18n="stat_streak">Current Streak</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" id="stat-maxstreak">0</div>
+                    <div class="stat-label" data-i18n="stat_maxstreak">Max Streak</div>
+                </div>
+            </div>
+            <h3 style="font-size: 0.9rem; margin-bottom: 15px; color: var(--gold); text-align: center; letter-spacing: 1px;" data-i18n="stat_dist">GUESS DISTRIBUTION</h3>
+            <div class="stats-dist" id="stats-dist">
+                <!-- Barras construídas via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Configurações -->
+    <div id="settings-modal" class="modal-overlay" style="display:none">
+        <div class="modal-content" style="max-width: 320px;">
+            <button class="modal-close" id="settings-close">&times;</button>
+            <h2 data-i18n="settings_title">SETTINGS</h2>
+            
+            <div class="settings-group">
+                <div class="setting-item">
+                    <label for="theme-select" data-i18n="set_theme">Theme</label>
+                    <select id="theme-select" class="setting-select">
+                        <option value="dark" data-i18n="set_dark">Dark</option>
+                        <option value="light" data-i18n="set_light">Light</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="lang-select" data-i18n="set_lang">Language</label>
+                    <select id="lang-select" class="setting-select">
+                        <option value="en">English</option>
+                        <option value="pt-br">Português (BR)</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="mute-toggle" data-i18n="set_mute">Mute Sounds</label>
+                    <label class="switch">
+                        <input type="checkbox" id="mute-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Script separado extraído -->
     <script src="script.js"></script>
