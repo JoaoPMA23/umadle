@@ -32,6 +32,36 @@ export default async function handler(req, res) {
     }
   }
 
+  // Handle Editing a character
+  if (req.method === 'PUT') {
+    try {
+      const char = req.body;
+      const originalName = char.originalName;
+
+      if (!originalName) {
+         return res.status(400).json({ error: 'Missing originalName for update operation' });
+      }
+      
+      await db.execute({
+        sql: `UPDATE characters SET 
+              name = ?, imageUrl = ?, type = ?, distance = ?, style = ?, 
+              height = ?, g1Wins = ?, birthYear = ?, releaseYear = ?, dotColor = ?
+              WHERE name = ?`,
+        args: [
+          char.name, char.imageUrl, char.type, char.distance, 
+          char.style, char.height, char.g1Wins, char.birthYear, 
+          char.releaseYear, char.dotColor,
+          originalName
+        ]
+      });
+
+      return res.status(200).json({ success: true, message: 'Character updated successfully!' });
+    } catch (error) {
+      console.error('Error updating character:', error);
+      return res.status(500).json({ error: 'Failed to update character', details: error.message });
+    }
+  }
+
   // Handle Deleting a character
   if (req.method === 'DELETE') {
     try {

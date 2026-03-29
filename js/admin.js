@@ -1,4 +1,6 @@
 let AUTH_TOKEN = localStorage.getItem('adminToken') || '';
+let isEditMode = false;
+let globalCharacters = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     if (AUTH_TOKEN) {
@@ -27,35 +29,91 @@ async function loadCharacters() {
     try {
         const response = await fetch('/api/characters');
         if (!response.ok) throw new Error('Falha ao carregar');
-        const data = await response.json();
+        globalCharacters = await response.json();
         
-        document.getElementById('char-count').innerText = `(${data.length} total)`;
+        document.getElementById('char-count').innerText = `${globalCharacters.length}`;
         
         const list = document.getElementById('character-list');
         list.innerHTML = '';
         
-        data.reverse().forEach(char => {
+        // Reverse so newest additions appear usually at the top/bottom depending on DB insertion
+        const sorted = [...globalCharacters].reverse();
+
+        sorted.forEach(char => {
             const div = document.createElement('div');
-            div.className = 'char-item';
+            div.className = 'char-card';
             div.innerHTML = `
-                <div>
-                    <img src="${char.imageUrl}" style="width:30px; border-radius:15px; vertical-align:middle; margin-right: 10px;">
-                    <strong>${char.name}</strong> (${char.type})
+                <div class="char-header">
+                    <img src="${char.imageUrl}" class="char-avatar" alt="${char.name}" onerror="this.src='https://via.placeholder.com/50?text=IMG'">
+                    <div class="char-info">
+                        <h3>${char.name}</h3>
+                        <p>⭐ ${char.type} | 🐎 ${char.distance}</p>
+                    </div>
                 </div>
-                <button class="btn-danger" style="width:auto; padding: 0.5rem" onclick="deleteChar('${char.name}')">❌ Deletar</button>
+                <div class="char-actions">
+                    <button class="btn-edit" onclick="startEdit('${char.name.replace(/'/g, "\\'")}')">✏️ Editar</button>
+                    <button class="btn-danger" onclick="deleteChar('${char.name.replace(/'/g, "\\'")}')">❌</button>
+                </div>
             `;
             list.appendChild(div);
         });
     } catch (error) {
-        document.getElementById('character-list').innerText = 'Erro ao carregar dados. O BD está online?';
+        document.getElementById('character-list').innerHTML = '<div style="color:#f87171; grid-column:1/-1; padding:2rem; text-align:center;">Erro ao carregar do Turso. Você rodou a Vercel direito?</div>';
     }
+}
+
+function startEdit(name) {
+    const char = globalCharacters.find(c => c.name === name);
+    if(!char) return;
+
+    isEditMode = true;
+    document.getElementById('originalName').value = char.name;
+    document.getElementById('name').value = char.name;
+    document.getElementById('imageUrl').value = char.imageUrl;
+    document.getElementById('type').value = char.type;
+    document.getElementById('distance').value = char.distance;
+    document.getElementById('style').value = char.style;
+    document.getElementById('height').value = char.height;
+    document.getElementById('g1Wins').value = char.g1Wins;
+    document.getElementById('birthYear').value = char.birthYear;
+    document.getElementById('releaseYear').value = char.releaseYear;
+    document.getElementById('dotColor').value = char.dotColor;
+
+    document.getElementById('submit-btn').innerHTML = '💾 Salvar Alterações';
+    document.getElementById('submit-btn').style.background = '#f59e0b'; // Amber
+    document.getElementById('cancel-btn').style.display = 'block';
+    
+    document.getElementById('edit-mode-badge').style.display = 'inline-block';
+    
+    // Smooth scroll to top form
+    document.getElementById('form-container').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelEdit() {
+    isEditMode = false;
+    document.getElementById('originalName').value = '';
+    document.getElementById('add-form').reset();
+    
+    document.getElementById('submit-btn').innerHTML = '✨ Adicionar ao Jogo';
+    document.getElementById('submit-btn').style.background = '#4caf50';
+    document.getElementById('cancel-btn').style.display = 'none';
+    document.getElementById('edit-mode-badge').style.display = 'none';
+    showFeedback('', '');
+}
+
+function showFeedback(msg, color) {
+    const fb = document.getElementById('feedback');
+    fb.innerText = msg;
+    fb.style.color = color;
 }
 
 document.getElementById('add-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
+    const btn = document.getElementById('submit-btn');
+    const originalText = btn.innerHTML;
+    
     btn.disabled = true;
-    btn.innerText = 'Salvando...';
+    btn.innerText = '⏳ Processando...';
 
     const charData = {
         name: document.getElementById('name').value,
@@ -67,12 +125,15 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
         g1Wins: parseInt(document.getElementById('g1Wins').value),
         birthYear: parseInt(document.getElementById('birthYear').value),
         releaseYear: parseInt(document.getElementById('releaseYear').value),
-        dotColor: document.getElementById('dotColor').value
+        dotColor: document.getElementById('dotColor').value,
+        originalName: document.getElementById('originalName').value // Utilizado apenas no PUT
     };
+
+    const method = isEditMode ? 'PUT' : 'POST';
 
     try {
         const res = await fetch('/api/admin-characters', {
-            method: 'POST',
+            method: method,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${AUTH_TOKEN}`
@@ -82,30 +143,30 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
         
         if (!res.ok) {
             if (res.status === 401) {
-                alert("Senha Administrativa Incorreta! Fazendo logout.");
+                alert("Sessão Expirada ou Sem Acesso.");
                 localStorage.removeItem('adminToken');
                 location.reload();
             } else {
                 const data = await res.json();
-                throw new Error(data.error || 'Erro desconhecido');
+                throw new Error(data.error || 'Erro no banco');
             }
         } else {
-            document.getElementById('feedback').innerText = '✅ Adicionado com sucesso!';
-            document.getElementById('feedback').style.color = '#4caf50';
-            e.target.reset(); // clear form
-            loadCharacters(); // reload list
+            showFeedback(isEditMode ? '✅ Alterações Salvas!' : '✨ Personagem Adicionada!', '#4caf50');
+            cancelEdit();
+            loadCharacters(); 
+            
+            setTimeout(() => { showFeedback('', ''); }, 3000);
         }
     } catch (err) {
-        document.getElementById('feedback').innerText = '❌ Erro: ' + err.message;
-        document.getElementById('feedback').style.color = '#f44336';
+        showFeedback('❌ Erro: ' + err.message, '#f87171');
     } finally {
         btn.disabled = false;
-        btn.innerText = 'Cadastrar Personagem';
+        btn.innerHTML = originalText;
     }
 });
 
 async function deleteChar(name) {
-    if(!confirm(`Tem certeza que quer deletar ${name}?`)) return;
+    if(!confirm(`Excluir as informações da ${name}?`)) return;
 
     try {
         const res = await fetch('/api/admin-characters', {
@@ -119,15 +180,13 @@ async function deleteChar(name) {
         
         if (!res.ok) {
             if(res.status === 401) {
-                alert("Senha Inválida.");
                 localStorage.removeItem('adminToken');
                 location.reload();
             }
-            throw new Error('Erro ao deletar');
+            throw new Error('Falha ao deletar do Turso');
         }
-
-        loadCharacters(); // reload list
+        loadCharacters();
     } catch (err) {
-        alert('Erro ao deletar: ' + err.message);
+        alert('Erro: ' + err.message);
     }
 }
