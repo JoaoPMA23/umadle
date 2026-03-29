@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,43 +11,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #e91e63; /* Vibrant Pink */
+            --primary: #e91e63;
+            /* Vibrant Pink */
             --primary-hover: #c2185b;
             --success: #4caf50;
             --danger: #f44336;
-            --bg: #0f172a; /* Slate 900 */
+            --bg: #0f172a;
+            /* Slate 900 */
             --glass-bg: rgba(30, 41, 59, 0.7);
             --glass-border: rgba(255, 255, 255, 0.1);
             --text: #f8fafc;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
+        body {
+            font-family: 'Inter', sans-serif;
             background: var(--bg);
             background-image: radial-gradient(circle at 15% 50%, rgba(233, 30, 99, 0.15), transparent 25%),
-                              radial-gradient(circle at 85% 30%, rgba(76, 175, 80, 0.1), transparent 25%);
-            color: var(--text); 
-            padding: 2rem; 
+                radial-gradient(circle at 85% 30%, rgba(76, 175, 80, 0.1), transparent 25%);
+            color: var(--text);
+            padding: 2rem;
             margin: 0;
             min-height: 100vh;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-        .glass-card { 
-            background: var(--glass-bg); 
+        .glass-card {
+            background: var(--glass-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 2rem; 
-            border-radius: 16px; 
+            padding: 2rem;
+            border-radius: 16px;
             border: 1px solid var(--glass-border);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        h1, h2 { color: #f8fafc; margin-top: 0; font-weight: 800; letter-spacing: -0.5px; }
-        h1 span { color: var(--primary); }
+        h1,
+        h2 {
+            color: #f8fafc;
+            margin-top: 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
 
         .form-grid {
             display: grid;
@@ -55,45 +70,83 @@
             margin-bottom: 1.5rem;
         }
 
-        .form-group { margin-bottom: 0; }
-        label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem; color: #cbd5e1; }
-        
-        input, select { 
-            width: 100%; 
-            padding: 0.8rem; 
-            border: 1px solid rgba(255,255,255,0.15); 
-            background: rgba(0, 0, 0, 0.2); 
-            color: #fff; 
-            border-radius: 8px; 
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            border-radius: 8px;
             font-family: 'Inter', sans-serif;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
-        input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2); }
-        input[type="color"] { padding: 0.2rem; height: 46px; cursor: pointer; }
 
-        button { 
-            background: var(--primary); 
-            color: white; 
-            padding: 0.8rem 1.5rem; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            font-weight: 600; 
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+        }
+
+        input[type="color"] {
+            padding: 0.2rem;
+            height: 46px;
+            cursor: pointer;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
         }
-        button:hover { background: var(--primary-hover); transform: translateY(-2px); }
-        button:active { transform: translateY(0); }
-        
-        .btn-success { background: var(--success); }
-        .btn-success:hover { background: #43a047; }
-        
-        button.btn-cancel { background: transparent; border: 1px solid rgba(255,255,255,0.2); }
-        button.btn-cancel:hover { background: rgba(255,255,255,0.1); }
+
+        button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #43a047;
+        }
+
+        button.btn-cancel {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        button.btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
         /* Grid de Personagens */
         .character-grid {
@@ -104,8 +157,8 @@
         }
 
         .char-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 1rem;
             display: flex;
@@ -113,10 +166,11 @@
             gap: 1rem;
             transition: transform 0.2s, background 0.2s;
         }
+
         .char-card:hover {
             transform: translateY(-4px);
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .char-header {
@@ -124,33 +178,62 @@
             align-items: center;
             gap: 1rem;
         }
+
         .char-avatar {
             width: 50px;
             height: 50px;
             border-radius: 25px;
             object-fit: cover;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
-        .char-info h3 { margin: 0 0 0.2rem 0; font-size: 1.1rem; }
-        .char-info p { margin: 0; font-size: 0.85rem; color: #94a3b8; }
+
+        .char-info h3 {
+            margin: 0 0 0.2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .char-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
 
         .char-actions {
             display: flex;
             gap: 0.5rem;
             margin-top: auto;
         }
+
         .char-actions button {
             flex: 1;
             padding: 0.5rem;
             font-size: 0.9rem;
         }
-        .char-actions .btn-edit { background: rgba(255,255,255,0.1); color: #fff; }
-        .char-actions .btn-edit:hover { background: rgba(255,255,255,0.2); }
-        .char-actions .btn-danger { background: rgba(244, 67, 54, 0.2); color: #f87171; }
-        .char-actions .btn-danger:hover { background: rgba(244, 67, 54, 0.4); color: #fff; }
 
-        #auth-section, #admin-section { display: none; }
-        
+        .char-actions .btn-edit {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .char-actions .btn-edit:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .char-actions .btn-danger {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f87171;
+        }
+
+        .char-actions .btn-danger:hover {
+            background: rgba(244, 67, 54, 0.4);
+            color: #fff;
+        }
+
+        #auth-section,
+        #admin-section {
+            display: none;
+        }
+
         #edit-mode-badge {
             display: none;
             background: #f59e0b;
@@ -164,6 +247,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -171,7 +255,8 @@
             <h1>Admin <span>Login</span></h1>
             <p style="color:#94a3b8; margin-bottom: 2rem;">Acesso restrito. Insira a senha mestra.</p>
             <div class="form-group" style="margin-bottom: 1.5rem;">
-                <input type="password" id="admin-secret" placeholder="••••••••" onkeypress="if(event.key === 'Enter') login()">
+                <input type="password" id="admin-secret" placeholder="••••••••"
+                    onkeypress="if(event.key === 'Enter') login()">
             </div>
             <button onclick="login()" style="width: 100%;">Acessar Painel</button>
         </div>
@@ -180,14 +265,16 @@
             <div class="glass-card" id="form-container">
                 <h2>Gerenciar Umamusume <span id="edit-mode-badge">MODO EDIÇÃO</span></h2>
                 <form id="add-form">
-                    
+
                     <input type="hidden" id="originalName" value="">
 
                     <div class="form-grid">
-                        <div class="form-group"><label>Nome (Inglês Oficial)</label><input type="text" id="name" required placeholder="Ex: Special Week"></div>
-                        <div class="form-group"><label>URL da Imagem (Ícone)</label><input type="url" id="imageUrl" required placeholder="https://..."></div>
+                        <div class="form-group"><label>Nome (Inglês Oficial)</label><input type="text" id="name"
+                                required placeholder="Ex: Special Week"></div>
+                        <div class="form-group"><label>URL da Imagem (Ícone)</label><input type="url" id="imageUrl"
+                                required placeholder="https://..."></div>
                     </div>
-                    
+
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Tipo de Pista</label>
@@ -195,24 +282,33 @@
                                 <option value="" disabled selected>Escolha a pista</option>
                                 <option value="Turf">Turf</option>
                                 <option value="Dirt">Dirt</option>
-                                <option value="Turf, Dirt">Turf & Dirt (Ambas)</option>
+                                <option value="Turf, Dirt">Turf/Dirt</option>
                             </select>
                         </div>
-                        <div class="form-group"><label>Distância</label><input type="text" id="distance" required placeholder="Medium, Long, Mile (Use vírgulas)"></div>
-                        <div class="form-group"><label>Estratégia (Style)</label><input type="text" id="style" required placeholder="Late Surger, Front Runner"></div>
+                        <div class="form-group"><label>Distância</label><input type="text" id="distance" required
+                                placeholder="Medium, Long, Mile (Use vírgulas)"></div>
+                        <div class="form-group"><label>Estratégia (Style)</label><input type="text" id="style" required
+                                placeholder="Late Surger, Front Runner"></div>
                     </div>
 
                     <div class="form-grid">
-                        <div class="form-group"><label>Altura (cm)</label><input type="number" id="height" required placeholder="158"></div>
-                        <div class="form-group"><label>Vitórias G1</label><input type="number" id="g1Wins" required placeholder="4"></div>
-                        <div class="form-group"><label>Ano de Nasc.</label><input type="number" id="birthYear" required placeholder="1995"></div>
-                        <div class="form-group"><label>Lançamento (Jogo)</label><input type="number" id="releaseYear" required placeholder="2021"></div>
-                        <div class="form-group"><label>Cor do Ícone (Hex)</label><input type="color" id="dotColor" value="#e91e63" required></div>
+                        <div class="form-group"><label>Altura (cm)</label><input type="number" id="height" required
+                                placeholder="158"></div>
+                        <div class="form-group"><label>Vitórias G1</label><input type="number" id="g1Wins" required
+                                placeholder="4"></div>
+                        <div class="form-group"><label>Ano de Nasc.</label><input type="number" id="birthYear" required
+                                placeholder="1995"></div>
+                        <div class="form-group"><label>Lançamento (Jogo)</label><input type="number" id="releaseYear"
+                                required placeholder="2021"></div>
+                        <div class="form-group"><label>Cor do Ícone (Hex)</label><input type="color" id="dotColor"
+                                value="#e91e63" required></div>
                     </div>
-                    
+
                     <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                        <button type="submit" id="submit-btn" class="btn-success" style="flex:2;">✨ Adicionar ao Jogo</button>
-                        <button type="button" id="cancel-btn" class="btn-cancel" style="display:none; flex:1;" onclick="cancelEdit()">Cancelar Edição</button>
+                        <button type="submit" id="submit-btn" class="btn-success" style="flex:2;">✨ Adicionar ao
+                            Jogo</button>
+                        <button type="button" id="cancel-btn" class="btn-cancel" style="display:none; flex:1;"
+                            onclick="cancelEdit()">Cancelar Edição</button>
                     </div>
                 </form>
                 <p id="feedback" style="margin-top: 1rem; font-weight: bold; min-height: 24px; text-align: center;"></p>
@@ -221,12 +317,15 @@
             <div class="glass-card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h2>Garotas na Pista</h2>
-                    <span style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold;" id="char-count">0</span>
+                    <span
+                        style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold;"
+                        id="char-count">0</span>
                 </div>
-                
+
                 <div class="character-grid" id="character-list">
                     <!-- Cards de personagens serão injetados aqui -->
-                    <div style="color: #94a3b8; text-align: center; grid-column: 1/-1; padding: 2rem;">Carregando banco de dados do Turso...</div>
+                    <div style="color: #94a3b8; text-align: center; grid-column: 1/-1; padding: 2rem;">Carregando banco
+                        de dados do Turso...</div>
                 </div>
             </div>
         </div>
@@ -234,4 +333,5 @@
 
     <script src="js/admin.js"></script>
 </body>
+
 </html>
