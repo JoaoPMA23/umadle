@@ -29,6 +29,19 @@ export const checkAccuracy = (guessedItem, key) => {
     const trueValue = state.answer[key];
     const guessedValue = guessedItem[key];
 
+    if (['type', 'distance', 'style'].includes(key)) {
+        const trueArr = String(trueValue).split(/[\/,]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+        const guessArr = String(guessedValue).split(/[\/,]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+        
+        const isExact = trueArr.length === guessArr.length && trueArr.every(v => guessArr.includes(v));
+        if (isExact) return 'correct';
+        
+        const isPartial = trueArr.some(v => guessArr.includes(v));
+        if (isPartial) return 'partial';
+        
+        return 'wrong';
+    }
+
     if (key === 'height') {
         if (trueValue === guessedValue) return 'correct';
         if (Math.abs(trueValue - guessedValue) <= 3) return 'partial';
