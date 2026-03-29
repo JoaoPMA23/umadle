@@ -1,98 +1,110 @@
 [
     {
-        "name": "Welcome to the Tresen Academy!",
+        "name": "Hayakawa Tazuna (Friend)",
         "character": "Hayakawa Tazuna",
         "rarity": "SSR",
         "type": "Friend",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Reduces energy consumption rate during training.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10001.png"
     },
     {
-        "name": "A Resounding Fanfare",
+        "name": "Tokai Teio (Speed)",
         "character": "Tokai Teio",
         "rarity": "SSR",
         "type": "Speed",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Increases speed stat gain during speed training.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10002.png"
     },
     {
-        "name": "Run with Me!",
+        "name": "Silence Suzuka (Speed)",
         "character": "Silence Suzuka",
         "rarity": "SSR",
         "type": "Speed",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Increases maximum speed limit.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10003.png"
     },
     {
-        "name": "Unsinkable Ship",
+        "name": "Gold Ship (Stamina)",
         "character": "Gold Ship",
         "rarity": "SSR",
         "type": "Stamina",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Restores stamina during long-distance races.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10005.png"
     },
     {
-        "name": "7 cm Beyond",
+        "name": "Vodka (Power)",
         "character": "Vodka",
         "rarity": "SSR",
         "type": "Power",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Boosts acceleration at the start of the final straight.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10006.png"
     },
     {
-        "name": "Dear My Twin",
+        "name": "Biwa Hayahide (Intelligence)",
         "character": "Biwa Hayahide",
         "rarity": "SSR",
         "type": "Intelligence",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Reduces chance of being blocked by other girls.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10008.png"
     },
     {
-        "name": "To You, From Your Devoted Servant",
+        "name": "Fine Motion (Intelligence)",
         "character": "Fine Motion",
         "rarity": "SSR",
         "type": "Intelligence",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] High probability of successful training events.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10010.png"
     },
     {
-        "name": "Approaching Heat",
+        "name": "Kitasan Black (Speed)",
         "character": "Kitasan Black",
         "rarity": "SSR",
         "type": "Speed",
         "releaseYear": 2021,
+        "uniqueEffect": "Increases stat gains when training together (5%)\nIncreases probability of getting assigned to specialty training category (20%)",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10041.png"
     },
     {
-        "name": "Its Name is Meaningless",
+        "name": "Satono Diamond (Stamina)",
         "character": "Satono Diamond",
         "rarity": "SSR",
         "type": "Stamina",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Improves stamina efficiency.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10042.png"
     },
     {
-        "name": "Pushed by Passion",
+        "name": "Narita Top Road (Speed)",
         "character": "Narita Top Road",
         "rarity": "SSR",
         "type": "Speed",
         "releaseYear": 2022,
+        "uniqueEffect": "[Placeholder] Speed boost in the late race stages.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10065.png"
     },
     {
-        "name": "The One I Want to Catch Up To",
+        "name": "Symboli Rudolf (Stamina)",
         "character": "Symboli Rudolf",
         "rarity": "SSR",
         "type": "Stamina",
         "releaseYear": 2023,
+        "uniqueEffect": "[Placeholder] Massively reduces stamina consumption in G1 races.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10016.png"
     },
     {
-        "name": "A Single Drop of Brilliance",
+        "name": "Seiun Sky (Stamina)",
         "character": "Seiun Sky",
         "rarity": "SSR",
         "type": "Stamina",
         "releaseYear": 2021,
+        "uniqueEffect": "[Placeholder] Greatly increases stamina during the last leg.",
         "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10020.png"
     }
 ]

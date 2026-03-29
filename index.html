@@ -12,6 +12,9 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&family=Nunito:wght@400;700;800&display=swap"
         rel="stylesheet">
 
+    <!-- Efeitos de Chuva de Confetes -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
     <!-- Link para a folha de estilos extraída -->
     <link href="style.css" rel="stylesheet">
 </head>
@@ -58,6 +61,12 @@
             <input id="search-input" data-i18n-ph="placeholder" placeholder="Type an Uma Musume's name..." autocomplete="off">
             <button class="search-btn" id="search-btn" aria-label="Search">&#128269;</button>
             <div class="dropdown" id="dropdown-menu" style="display:none"></div>
+        </div>
+
+        <!-- Box de Dicas (Hints) -->
+        <div id="hints-container" class="hints-container" style="display:none">
+            <div id="hint-1" class="hint-box"></div>
+            <div id="hint-2" class="hint-box"></div>
         </div>
 
         <!-- Legenda -->
@@ -167,7 +176,7 @@
     </div>
 
     <!-- Script separado extraído -->
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>

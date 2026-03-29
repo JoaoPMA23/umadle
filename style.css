@@ -715,3 +715,38 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(20px);
 }
+
+/* Hints Styles */
+.hints-container {
+    max-width: 520px;
+    margin: 0 auto 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hint-box {
+    background: var(--input-bg);
+    border: 2px solid var(--wrong-dot);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-align: center;
+    transition: all 0.3s ease;
+    white-space: pre-wrap; 
+}
+
+.hint-box.unlocked {
+    border-color: var(--gold);
+    color: var(--text-main);
+    background: rgba(245, 200, 66, 0.1);
+    box-shadow: 0 0 10px rgba(245, 200, 66, 0.2);
+}
+
+.hint-box .lock-icon {
+    font-size: 1.2rem;
+    margin-right: 6px;
+    vertical-align: middle;
+}
