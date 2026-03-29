@@ -1,0 +1,10 @@
+{
+  "name": "umadle",
+  "version": "1.0.0",
+  "description": "Umadle guessing game with Turso backend",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "@libsql/client": "^0.14.0"
+  }
+}

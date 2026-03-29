@@ -11,7 +11,7 @@ export const state = {
 
 export const MODE_CONFIGS = {
     'classic': {
-        file: 'database.json',
+        file: '/api/characters',
         columns: [
             { key: 'type', label: 'Surface', icon: '⭐' },
             { key: 'distance', label: 'Distance', icon: '🐎' },

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umadle Admin Panel</title>
+    <!-- We're keeping styling simple using simple classes -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #121212; color: #fff; padding: 2rem; max-width: 800px; margin: 0 auto; }
+        .card { background: #1e1e1e; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        h1, h2 { color: #f9a825; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        input, select { width: 100%; padding: 0.75rem; border: 1px solid #333; background: #2c2c2c; color: #fff; border-radius: 4px; box-sizing: border-box; }
+        button { background: #4caf50; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; width: 100%; font-weight: bold; }
+        button:hover { background: #45a049; }
+        .btn-danger { background: #f44336; }
+        .btn-danger:hover { background: #d32f2f; }
+        .char-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-bottom: 1px solid #333; }
+        
+        #auth-section, #admin-section { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="auth-section" class="card">
+        <h1>Admin Login</h1>
+        <p>Insira a senha de administrador (A mesma do ADMIN_SECRET da Vercel).</p>
+        <div class="form-group">
+            <input type="password" id="admin-secret" placeholder="ADMIN_SECRET">
+        </div>
+        <button onclick="login()">Entrar</button>
+    </div>
+
+    <div id="admin-section">
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2>Adicionar Novo Personagem</h2>
+            <form id="add-form">
+                <div class="form-group"><label>Name</label><input type="text" id="name" required></div>
+                <div class="form-group"><label>Image URL</label><input type="url" id="imageUrl" required></div>
+                <div class="form-group"><label>Type (Turf, Dirt, or Turf/Dirt)</label><input type="text" id="type" required></div>
+                <div class="form-group"><label>Distance (Sprint, Mile, Middle, Long)</label><input type="text" id="distance" required></div>
+                <div class="form-group"><label>Style (Front Runner, Pace Chaser, Late Surger, End Closer)</label><input type="text" id="style" required></div>
+                <div class="form-group"><label>Height (em cm, ex: 159)</label><input type="number" id="height" required></div>
+                <div class="form-group"><label>G1 Wins</label><input type="number" id="g1Wins" required></div>
+                <div class="form-group"><label>Birth Year</label><input type="number" id="birthYear" required></div>
+                <div class="form-group"><label>Release Year</label><input type="number" id="releaseYear" required></div>
+                <div class="form-group"><label>Dot Color (Hex, ex: #ff0000)</label><input type="color" id="dotColor" value="#b71c1c" required></div>
+                <button type="submit">Cadastrar Personagem</button>
+            </form>
+            <p id="feedback" style="margin-top: 1rem; font-weight: bold;"></p>
+        </div>
+
+        <div class="card">
+            <h2>Personagens Cadastrados <small id="char-count"></small></h2>
+            <div id="character-list">Carregando...</div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
