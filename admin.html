@@ -189,7 +189,15 @@
                     </div>
                     
                     <div class="form-grid">
-                        <div class="form-group"><label>Tipo de Pista</label><input type="text" id="type" required placeholder="Turf, Dirt (Use vírgula para mais de um)"></div>
+                        <div class="form-group">
+                            <label>Tipo de Pista</label>
+                            <select id="type" required>
+                                <option value="" disabled selected>Escolha a pista</option>
+                                <option value="Turf">Turf</option>
+                                <option value="Dirt">Dirt</option>
+                                <option value="Turf, Dirt">Turf & Dirt (Ambas)</option>
+                            </select>
+                        </div>
                         <div class="form-group"><label>Distância</label><input type="text" id="distance" required placeholder="Medium, Long, Mile (Use vírgulas)"></div>
                         <div class="form-group"><label>Estratégia (Style)</label><input type="text" id="style" required placeholder="Late Surger, Front Runner"></div>
                     </div>
