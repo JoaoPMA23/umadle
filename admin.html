@@ -286,24 +286,38 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Distância <span style="font-size:0.75rem;color:#94a3b8;">(Ctrl/Cmd + clique p/
-                                    múltiplos)</span></label>
-                            <select id="distance" multiple size="4" required style="padding: 0.4rem; height: auto;">
-                                <option value="Sprint">Sprint</option>
-                                <option value="Mile">Mile</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Long">Long</option>
-                            </select>
+                            <label>Distância</label>
+                            <div style="display:flex;gap:0.5rem;align-items:center;">
+                                <input type="text" id="distance" required placeholder="Ex: Sprint / Mile"
+                                    style="flex:2;">
+                                <select id="distance-picker" style="flex:1;"
+                                    onchange="if(this.value){let el=document.getElementById('distance'); el.value=el.value?el.value+' / '+this.value:this.value; this.value='';}">
+                                    <option value="" disabled selected>+ Adicionar</option>
+                                    <option value="Sprint">Sprint</option>
+                                    <option value="Mile">Mile</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Long">Long</option>
+                                </select>
+                                <button type="button" class="btn-cancel" style="padding:0 0.8rem;"
+                                    onclick="document.getElementById('distance').value=''">❌</button>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Estratégia (Style) <span style="font-size:0.75rem;color:#94a3b8;">(Ctrl/Cmd + clique
-                                    p/ múltiplos)</span></label>
-                            <select id="style" multiple size="4" required style="padding: 0.4rem; height: auto;">
-                                <option value="Front Runner">Front Runner</option>
-                                <option value="Pace Chaser">Pace Chaser</option>
-                                <option value="Late Surger">Late Surger</option>
-                                <option value="End Closer">End Closer</option>
-                            </select>
+                            <label>Estratégia (Style)</label>
+                            <div style="display:flex;gap:0.5rem;align-items:center;">
+                                <input type="text" id="style" required placeholder="Late Surger / Front Runner"
+                                    style="flex:2;">
+                                <select id="style-picker" style="flex:1;"
+                                    onchange="if(this.value){let el=document.getElementById('style'); el.value=el.value?el.value+' / '+this.value:this.value; this.value='';}">
+                                    <option value="" disabled selected>+ Adicionar</option>
+                                    <option value="Front Runner">Front Runner</option>
+                                    <option value="Pace Chaser">Pace Chaser</option>
+                                    <option value="Late Surger">Late Surger</option>
+                                    <option value="End Closer">End Closer</option>
+                                </select>
+                                <button type="button" class="btn-cancel" style="padding:0 0.8rem;"
+                                    onclick="document.getElementById('style').value=''">❌</button>
+                            </div>
                         </div>
                     </div>
 
