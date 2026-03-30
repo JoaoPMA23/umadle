@@ -71,11 +71,8 @@ function startEdit(name) {
     document.getElementById('name').value = char.name;
     document.getElementById('imageUrl').value = char.imageUrl;
     document.getElementById('type').value = char.type;
-    const distArr = char.distance.split(',').map(s => s.trim());
-    Array.from(document.getElementById('distance').options).forEach(o => o.selected = distArr.includes(o.value));
-
-    const styleArr = char.style.split(',').map(s => s.trim());
-    Array.from(document.getElementById('style').options).forEach(o => o.selected = styleArr.includes(o.value));
+    document.getElementById('distance').value = char.distance.replace(/,/g, ' /');
+    document.getElementById('style').value = char.style.replace(/,/g, ' /');
     document.getElementById('height').value = char.height;
     document.getElementById('g1Wins').value = char.g1Wins;
     document.getElementById('birthYear').value = char.birthYear;
@@ -122,8 +119,8 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
         name: document.getElementById('name').value,
         imageUrl: document.getElementById('imageUrl').value,
         type: document.getElementById('type').value,
-        distance: Array.from(document.getElementById('distance').selectedOptions).map(o => o.value).join(', '),
-        style: Array.from(document.getElementById('style').selectedOptions).map(o => o.value).join(', '),
+        distance: document.getElementById('distance').value,
+        style: document.getElementById('style').value,
         height: parseInt(document.getElementById('height').value),
         g1Wins: parseInt(document.getElementById('g1Wins').value),
         birthYear: parseInt(document.getElementById('birthYear').value),
