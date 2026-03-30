@@ -2,7 +2,86 @@ let AUTH_TOKEN = localStorage.getItem('adminToken') || '';
 let isEditMode = false;
 let globalCharacters = [];
 
+// Custom Dropdown Logic
+class CustomSelect {
+    constructor(id) {
+        this.id = id;
+        this.box = document.getElementById(id + '-box');
+        this.menu = document.getElementById(id + '-menu');
+        this.tagsContainer = document.getElementById(id + '-tags');
+        this.hiddenInput = document.getElementById(id);
+        this.options = Array.from(this.menu.querySelectorAll('.option'));
+        this.selected = [];
+
+        this.box.addEventListener('click', (e) => {
+            if (!e.target.closest('.tag-remove')) {
+                this.menu.classList.toggle('show');
+            }
+        });
+
+        this.options.forEach(opt => {
+            opt.addEventListener('click', () => {
+                const val = opt.getAttribute('data-val');
+                this.toggleValue(val);
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!this.box.contains(e.target) && !this.menu.contains(e.target)) {
+                this.menu.classList.remove('show');
+            }
+        });
+    }
+
+    toggleValue(val) {
+        if (this.selected.includes(val)) {
+            this.selected = this.selected.filter(v => v !== val);
+        } else {
+            this.selected.push(val);
+        }
+        this.updateUI();
+    }
+
+    removeValue(val) {
+        this.selected = this.selected.filter(v => v !== val);
+        this.updateUI();
+    }
+
+    setValueFromString(str) {
+        if (!str) {
+            this.selected = [];
+        } else {
+            this.selected = str.split(/[\/,]+/).map(s => s.trim()).filter(Boolean);
+        }
+        this.updateUI();
+    }
+
+    updateUI() {
+        this.hiddenInput.value = this.selected.join(' / ');
+
+        if (this.selected.length === 0) {
+            this.tagsContainer.innerHTML = '<span class="placeholder">Selecione...</span>';
+        } else {
+            this.tagsContainer.innerHTML = this.selected.map(val =>
+                `<span class="tag">${val} <span class="tag-remove" onclick="window.${this.id}Select.removeValue('${val}'); event.stopPropagation();">×</span></span>`
+            ).join('');
+        }
+
+        this.options.forEach(opt => {
+            if (this.selected.includes(opt.getAttribute('data-val'))) {
+                opt.classList.add('selected');
+            } else {
+                opt.classList.remove('selected');
+            }
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa Dropdowns 
+    window.distanceSelect = new CustomSelect('distance');
+    window.styleSelect = new CustomSelect('style');
+
     if (AUTH_TOKEN) {
         showAdmin();
     } else {
@@ -71,8 +150,8 @@ function startEdit(name) {
     document.getElementById('name').value = char.name;
     document.getElementById('imageUrl').value = char.imageUrl;
     document.getElementById('type').value = char.type;
-    document.getElementById('distance').value = char.distance.replace(/,/g, ' /');
-    document.getElementById('style').value = char.style.replace(/,/g, ' /');
+    window.distanceSelect.setValueFromString(char.distance);
+    window.styleSelect.setValueFromString(char.style);
     document.getElementById('height').value = char.height;
     document.getElementById('g1Wins').value = char.g1Wins;
     document.getElementById('birthYear').value = char.birthYear;
@@ -94,7 +173,11 @@ function cancelEdit() {
     document.getElementById('originalName').value = '';
     document.getElementById('add-form').reset();
 
-    document.getElementById('submit-btn').innerHTML = '✨ Adicionar ao Jogo';
+    // Clear dropdowns customizados
+    window.distanceSelect.setValueFromString('');
+    window.styleSelect.setValueFromString('');
+
+    document.getElementById('submit-btn').innerHTML = 'Adicionar Servidora';
     document.getElementById('submit-btn').style.background = '#4caf50';
     document.getElementById('cancel-btn').style.display = 'none';
     document.getElementById('edit-mode-badge').style.display = 'none';
