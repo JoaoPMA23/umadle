@@ -79,6 +79,7 @@ class CustomSelect {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Inicializa Dropdowns 
+    window.typeSelect = new CustomSelect('type');
     window.distanceSelect = new CustomSelect('distance');
     window.styleSelect = new CustomSelect('style');
 
@@ -149,7 +150,7 @@ function startEdit(name) {
     document.getElementById('originalName').value = char.name;
     document.getElementById('name').value = char.name;
     document.getElementById('imageUrl').value = char.imageUrl;
-    document.getElementById('type').value = char.type;
+    window.typeSelect.setValueFromString(char.type);
     window.distanceSelect.setValueFromString(char.distance);
     window.styleSelect.setValueFromString(char.style);
     document.getElementById('height').value = char.height;
@@ -174,11 +175,12 @@ function cancelEdit() {
     document.getElementById('add-form').reset();
 
     // Clear dropdowns customizados
+    window.typeSelect.setValueFromString('');
     window.distanceSelect.setValueFromString('');
     window.styleSelect.setValueFromString('');
 
-    document.getElementById('submit-btn').innerHTML = 'Adicionar Servidora';
-    document.getElementById('submit-btn').style.background = '#4caf50';
+    document.getElementById('submit-btn').innerHTML = '✨ Adicionar Personagem';
+    document.getElementById('submit-btn').style.background = '#10b981';
     document.getElementById('cancel-btn').style.display = 'none';
     document.getElementById('edit-mode-badge').style.display = 'none';
     showFeedback('', '');
