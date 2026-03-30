@@ -36,7 +36,8 @@ export const MODE_CONFIGS = {
         columns: []
     },
     'splash': {
-        file: 'database_splash.json',
+        file: '/api/characters',
+        answerFile: 'database_splash.json',
         columns: []
     }
 };

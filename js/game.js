@@ -12,6 +12,14 @@ export const loadModeConfig = async () => {
         if (!response.ok) throw new Error("Fetch failed");
         state.db = await response.json();
 
+        if (config.answerFile) {
+            const ansResp = await fetch(config.answerFile);
+            if (!ansResp.ok) throw new Error("Answer fetch failed");
+            state.answerDb = await ansResp.json();
+        } else {
+            state.answerDb = state.db;
+        }
+
         initGame();
     } catch (err) {
         console.error("Could not load database: ", err);
@@ -20,8 +28,8 @@ export const loadModeConfig = async () => {
 };
 
 export const initGame = () => {
-    const dailyIndex = getDailyRandomNumber(state.db.length);
-    state.answer = state.db[dailyIndex];
+    const dailyIndex = getDailyRandomNumber(state.answerDb.length);
+    state.answer = state.answerDb[dailyIndex];
     state.guesses = [];
     state.isGameOver = false;
 
@@ -55,10 +63,10 @@ export const initGame = () => {
         state.guesses = JSON.parse(saved);
         if (state.guesses.length > 0) {
             DOM.tableWrapper.style.display = 'block';
-            state.guesses.forEach(g => renderRow(g, true)); 
-            
+            state.guesses.forEach(g => renderRow(g, true));
+
             if (state.currentMode === 'splash') updateSplashZoom();
-            
+
             if (state.guesses.some(g => g.name === state.answer.name)) {
                 endGame(true, true);
             }
@@ -84,7 +92,7 @@ export const submitGuess = () => {
 
     state.guesses.push(guessedItem);
     saveProgress();
-    
+
     if (state.currentMode === 'splash') updateSplashZoom();
 
     DOM.tableWrapper.style.display = 'block';
@@ -109,7 +117,7 @@ export const endGame = (isWin, instant) => {
         setTimeout(showStatsModal, 1200);
     }
 
-    if (state.currentMode === 'splash') updateSplashZoom(); 
+    if (state.currentMode === 'splash') updateSplashZoom();
     updateHints();
 
     renderResultBox();
