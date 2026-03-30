@@ -30,12 +30,12 @@ async function loadCharacters() {
         const response = await fetch('/api/characters');
         if (!response.ok) throw new Error('Falha ao carregar');
         globalCharacters = await response.json();
-        
+
         document.getElementById('char-count').innerText = `${globalCharacters.length}`;
-        
+
         const list = document.getElementById('character-list');
         list.innerHTML = '';
-        
+
         // Reverse so newest additions appear usually at the top/bottom depending on DB insertion
         const sorted = [...globalCharacters].reverse();
 
@@ -64,15 +64,18 @@ async function loadCharacters() {
 
 function startEdit(name) {
     const char = globalCharacters.find(c => c.name === name);
-    if(!char) return;
+    if (!char) return;
 
     isEditMode = true;
     document.getElementById('originalName').value = char.name;
     document.getElementById('name').value = char.name;
     document.getElementById('imageUrl').value = char.imageUrl;
     document.getElementById('type').value = char.type;
-    document.getElementById('distance').value = char.distance;
-    document.getElementById('style').value = char.style;
+    const distArr = char.distance.split(',').map(s => s.trim());
+    Array.from(document.getElementById('distance').options).forEach(o => o.selected = distArr.includes(o.value));
+
+    const styleArr = char.style.split(',').map(s => s.trim());
+    Array.from(document.getElementById('style').options).forEach(o => o.selected = styleArr.includes(o.value));
     document.getElementById('height').value = char.height;
     document.getElementById('g1Wins').value = char.g1Wins;
     document.getElementById('birthYear').value = char.birthYear;
@@ -82,9 +85,9 @@ function startEdit(name) {
     document.getElementById('submit-btn').innerHTML = '💾 Salvar Alterações';
     document.getElementById('submit-btn').style.background = '#f59e0b'; // Amber
     document.getElementById('cancel-btn').style.display = 'block';
-    
+
     document.getElementById('edit-mode-badge').style.display = 'inline-block';
-    
+
     // Smooth scroll to top form
     document.getElementById('form-container').scrollIntoView({ behavior: 'smooth' });
 }
@@ -93,7 +96,7 @@ function cancelEdit() {
     isEditMode = false;
     document.getElementById('originalName').value = '';
     document.getElementById('add-form').reset();
-    
+
     document.getElementById('submit-btn').innerHTML = '✨ Adicionar ao Jogo';
     document.getElementById('submit-btn').style.background = '#4caf50';
     document.getElementById('cancel-btn').style.display = 'none';
@@ -111,7 +114,7 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
     const originalText = btn.innerHTML;
-    
+
     btn.disabled = true;
     btn.innerText = '⏳ Processando...';
 
@@ -119,8 +122,8 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
         name: document.getElementById('name').value,
         imageUrl: document.getElementById('imageUrl').value,
         type: document.getElementById('type').value,
-        distance: document.getElementById('distance').value,
-        style: document.getElementById('style').value,
+        distance: Array.from(document.getElementById('distance').selectedOptions).map(o => o.value).join(', '),
+        style: Array.from(document.getElementById('style').selectedOptions).map(o => o.value).join(', '),
         height: parseInt(document.getElementById('height').value),
         g1Wins: parseInt(document.getElementById('g1Wins').value),
         birthYear: parseInt(document.getElementById('birthYear').value),
@@ -140,7 +143,7 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
             },
             body: JSON.stringify(charData)
         });
-        
+
         if (!res.ok) {
             if (res.status === 401) {
                 alert("Sessão Expirada ou Sem Acesso.");
@@ -153,8 +156,8 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
         } else {
             showFeedback(isEditMode ? '✅ Alterações Salvas!' : '✨ Personagem Adicionada!', '#4caf50');
             cancelEdit();
-            loadCharacters(); 
-            
+            loadCharacters();
+
             setTimeout(() => { showFeedback('', ''); }, 3000);
         }
     } catch (err) {
@@ -166,7 +169,7 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
 });
 
 async function deleteChar(name) {
-    if(!confirm(`Excluir as informações da ${name}?`)) return;
+    if (!confirm(`Excluir as informações da ${name}?`)) return;
 
     try {
         const res = await fetch('/api/admin-characters', {
@@ -177,9 +180,9 @@ async function deleteChar(name) {
             },
             body: JSON.stringify({ name })
         });
-        
+
         if (!res.ok) {
-            if(res.status === 401) {
+            if (res.status === 401) {
                 localStorage.removeItem('adminToken');
                 location.reload();
             }
