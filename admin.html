@@ -285,8 +285,16 @@
                                 <option value="Turf, Dirt">Turf/Dirt</option>
                             </select>
                         </div>
-                        <div class="form-group"><label>Distância</label><input type="text" id="distance" required
-                                placeholder="Medium, Long, Mile (Use vírgulas)"></div>
+                        <div class="form-group">
+                            <label>Distância</label>
+                            <select id="distance" required>
+                                <option value="" disabled selected>Escolha a distância</option>
+                                <option value="Sprint">Sprint</option>
+                                <option value="Mile">Mile</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Long">Long</option>
+                            </select>
+                        </div>
                         <div class="form-group"><label>Estratégia (Style)</label><input type="text" id="style" required
                                 placeholder="Late Surger, Front Runner"></div>
                     </div>
