@@ -1,110 +1,92 @@
 [
     {
-        "name": "Hayakawa Tazuna (Friend)",
-        "character": "Hayakawa Tazuna",
+        "name": "[A Promise] Special Week",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10001.png",
+        "character": "Special Week",
         "rarity": "SSR",
-        "type": "Friend",
+        "type": "Speed",
         "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Reduces energy consumption rate during training.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10001.png"
+        "uniqueEffect": "Aumenta o Training Effect em 10% no nível máximo"
     },
     {
-        "name": "Tokai Teio (Speed)",
+        "name": "[Enthusiastic Champion] Tokai Teio",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10002.png",
         "character": "Tokai Teio",
         "rarity": "SSR",
         "type": "Speed",
         "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Increases speed stat gain during speed training.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10002.png"
+        "uniqueEffect": "Garante a rara skill de aceleração 'Hachimitsu Power' ou bônus extras de velocidade"
     },
     {
-        "name": "Silence Suzuka (Speed)",
-        "character": "Silence Suzuka",
+        "name": "[Welcome to the Tresen Academy!] Tazuna Hayakawa",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_30001.png",
+        "character": "Tazuna Hayakawa",
         "rarity": "SSR",
-        "type": "Speed",
+        "type": "Friend",
         "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Increases maximum speed limit.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10003.png"
+        "uniqueEffect": "Cura energia (Vitality), previne ferimentos e reduz o consumo de estamina no modo corrida"
     },
     {
-        "name": "Gold Ship (Stamina)",
-        "character": "Gold Ship",
+        "name": "[Bounteous and Bestowing] Super Creek",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10012.png",
+        "character": "Super Creek",
         "rarity": "SSR",
         "type": "Stamina",
         "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Restores stamina during long-distance races.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10005.png"
+        "uniqueEffect": "Possui a rara skill 'Arc Maestro', que recupera muita estamina durante a corrida"
     },
     {
-        "name": "Vodka (Power)",
-        "character": "Vodka",
-        "rarity": "SSR",
-        "type": "Power",
-        "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Boosts acceleration at the start of the final straight.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10006.png"
-    },
-    {
-        "name": "Biwa Hayahide (Intelligence)",
-        "character": "Biwa Hayahide",
-        "rarity": "SSR",
-        "type": "Intelligence",
-        "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Reduces chance of being blocked by other girls.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10008.png"
-    },
-    {
-        "name": "Fine Motion (Intelligence)",
-        "character": "Fine Motion",
-        "rarity": "SSR",
-        "type": "Intelligence",
-        "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] High probability of successful training events.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10010.png"
-    },
-    {
-        "name": "Kitasan Black (Speed)",
+        "name": "[Just Following Behind You] Kitasan Black",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10041.png",
         "character": "Kitasan Black",
         "rarity": "SSR",
         "type": "Speed",
         "releaseYear": 2021,
-        "uniqueEffect": "Increases stat gains when training together (5%)\nIncreases probability of getting assigned to specialty training category (20%)",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10041.png"
+        "uniqueEffect": "Garante a rara skill de curva 'Arc of Proficiency'. Historicamente tida como a carta de velocidade número 1 do jogo"
     },
     {
-        "name": "Satono Diamond (Stamina)",
+        "name": "[Until Her Strength is Spent] Daiwa Scarlet",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10044.png",
+        "character": "Daiwa Scarlet",
+        "rarity": "SR",
+        "type": "Power",
+        "releaseYear": 2021,
+        "uniqueEffect": "Excelentes bônus base de atributo mesmo sedo SR, permitindo fortes treinos em inteligência e power."
+    },
+    {
+        "name": "[A Fleet-Footed Maiden] Sakura Bakushin O",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10015.png",
+        "character": "Sakura Bakushin O",
+        "rarity": "SSR",
+        "type": "Speed",
+        "releaseYear": 2021,
+        "uniqueEffect": "Forte ênfase em passivas de velocidade pura e distâncias curtas (Sprint)"
+    },
+    {
+        "name": "[Thanks] Fine Motion",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10010.png",
+        "character": "Fine Motion",
+        "rarity": "SSR",
+        "type": "Intelligence",
+        "releaseYear": 2021,
+        "uniqueEffect": "Concede bônus massivos em treinos de inteligência, ajudando no proc de skills"
+    },
+    {
+        "name": "[In My Tracksuit] Gold Ship",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10005.png",
+        "character": "Gold Ship",
+        "rarity": "SSR",
+        "type": "Stamina",
+        "releaseYear": 2021,
+        "uniqueEffect": "Fornece enorme quantidade de stamina para corredores de fundo (Long)"
+    },
+    {
+        "name": "[Dazzling World] Satono Diamond",
+        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10042.png",
         "character": "Satono Diamond",
         "rarity": "SSR",
         "type": "Stamina",
         "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Improves stamina efficiency.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10042.png"
-    },
-    {
-        "name": "Narita Top Road (Speed)",
-        "character": "Narita Top Road",
-        "rarity": "SSR",
-        "type": "Speed",
-        "releaseYear": 2022,
-        "uniqueEffect": "[Placeholder] Speed boost in the late race stages.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10065.png"
-    },
-    {
-        "name": "Symboli Rudolf (Stamina)",
-        "character": "Symboli Rudolf",
-        "rarity": "SSR",
-        "type": "Stamina",
-        "releaseYear": 2023,
-        "uniqueEffect": "[Placeholder] Massively reduces stamina consumption in G1 races.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10016.png"
-    },
-    {
-        "name": "Seiun Sky (Stamina)",
-        "character": "Seiun Sky",
-        "rarity": "SSR",
-        "type": "Stamina",
-        "releaseYear": 2021,
-        "uniqueEffect": "[Placeholder] Greatly increases stamina during the last leg.",
-        "imageUrl": "https://gametora.com/images/umamusume/support_cards/card_10020.png"
+        "uniqueEffect": "Redução excepcional no consumo de energia nos treinos (Energy Discount)"
     }
 ]

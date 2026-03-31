@@ -1,5 +1,5 @@
 export const state = {
-    currentMode: 'classic',
+    currentMode: 'hub',
     db: [],
     answer: null,
     guesses: [],
@@ -23,7 +23,7 @@ export const MODE_CONFIGS = {
         ]
     },
     'support': {
-        file: 'support_cards.json',
+        file: '/api/support_cards',
         columns: [
             { key: 'character', label: 'Character', icon: '👱‍♀️' },
             { key: 'rarity', label: 'Rarity', icon: '✨' },
@@ -32,12 +32,17 @@ export const MODE_CONFIGS = {
         ]
     },
     'emoji': {
-        file: 'database_emojis.json',
+        file: '/api/emojis',
+        columns: []
+    },
+    'quote': {
+        file: '/api/characters',
+        answerFile: '/api/quotes',
         columns: []
     },
     'splash': {
         file: '/api/characters',
-        answerFile: 'database_splash.json',
+        answerFile: '/api/splash',
         columns: []
     }
 };

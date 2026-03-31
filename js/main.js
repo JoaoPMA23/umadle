@@ -18,18 +18,19 @@ window.pickOption = (selectedName) => {
     submitGuess();
 };
 
-// Mode Buttons Events
-DOM.modeBtns.forEach(btn => {
-    btn.addEventListener('click', async () => {
-        if (btn.classList.contains('disabled')) return;
-
-        DOM.modeBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        state.currentMode = btn.dataset.mode;
+// Hub and Mode Cards Events
+DOM.modeCards.forEach(card => {
+    card.addEventListener('click', async () => {
+        if (card.classList.contains('disabled')) return;
+        state.currentMode = card.dataset.mode;
         DOM.dropdownMenu.style.display = 'none';
         await loadModeConfig();
     });
+});
+
+DOM.homeBtn.addEventListener('click', async () => {
+    state.currentMode = 'hub';
+    await loadModeConfig();
 });
 
 // Search inputs and dropdowns

@@ -4,6 +4,10 @@ import { checkAccuracy, getDirectionArrow } from './utils.js';
 import { loadStats } from './storage.js';
 
 export const DOM = {
+    homeBtn: document.getElementById('home-btn'),
+    hubContainer: document.getElementById('hub-container'),
+    gameContainer: document.getElementById('game-container'),
+    modeCards: document.querySelectorAll('.mode-card'),
     searchInput: document.getElementById('search-input'),
     dropdownMenu: document.getElementById('dropdown-menu'),
     searchBtn: document.getElementById('search-btn'),
@@ -50,7 +54,7 @@ export const updateSplashZoom = () => {
 export const updateHints = () => {
     if (state.currentMode === 'support') {
         DOM.hintsContainer.style.display = 'flex';
-        
+
         if (state.guesses.length >= 3 || state.isGameOver) {
             DOM.hint1.innerHTML = `<span class="lock-icon">🔓</span> ${t('hint1_title')}: <strong style="color:var(--gold)">${state.answer.releaseYear}</strong>`;
             DOM.hint1.classList.add('unlocked');
@@ -80,7 +84,7 @@ export const showStatsModal = () => {
     document.getElementById('stat-maxstreak').textContent = stats.maxStreak;
 
     let maxDist = 0;
-    Object.values(stats.distribution).forEach(v => { if(v > maxDist) maxDist = v; });
+    Object.values(stats.distribution).forEach(v => { if (v > maxDist) maxDist = v; });
 
     let distHTML = '';
     let maxShown = 6;
@@ -88,11 +92,11 @@ export const showStatsModal = () => {
         if (parseInt(k) > maxShown && stats.distribution[k] > 0) maxShown = parseInt(k);
     });
 
-    for(let i=1; i<=maxShown; i++) {
+    for (let i = 1; i <= maxShown; i++) {
         const val = stats.distribution[i] || 0;
-        const wPct = maxDist > 0 ? Math.max(8, Math.round((val / maxDist) * 100)) : 8; 
-        const isLastWin = (state.isGameOver && val > 0 && state.guesses.length === i && state.guesses[state.guesses.length-1]?.name === state.answer?.name);
-        
+        const wPct = maxDist > 0 ? Math.max(8, Math.round((val / maxDist) * 100)) : 8;
+        const isLastWin = (state.isGameOver && val > 0 && state.guesses.length === i && state.guesses[state.guesses.length - 1]?.name === state.answer?.name);
+
         distHTML += `
             <div class="dist-row">
                 <div class="dist-num">${i}</div>
@@ -131,7 +135,7 @@ export const showToast = (message) => {
 
 export const renderResultBox = () => {
     if (!state.isGameOver) return;
-    
+
     const isWin = state.guesses.length > 0 && state.guesses[state.guesses.length - 1].name === state.answer.name;
     const ModeName = state.currentMode.charAt(0).toUpperCase() + state.currentMode.slice(1);
 
@@ -155,9 +159,37 @@ export const renderResultBox = () => {
                 <div class="btn-container">
                     <button class="action-btn secondary" onclick="shareResult()">${t('share_btn')}</button>
                 </div>
-                <p style="margin-top: 10px; font-size:0.8rem; color:var(--text-muted)">${t('next_puzzle')}</p>
+                <p style="margin-top: 10px; font-size:0.8rem; color:var(--text-muted)">
+                    ${t('next_puzzle')}
+                    <span id="daily-timer" style="display:block; font-size: 1.6rem; font-weight: 800; font-family: monospace; color: var(--gold); margin-top: 5px; letter-spacing: 2px;">00:00:00</span>
+                </p>
             </div>
         `;
+
+        const updateTimer = () => {
+            const timerEl = document.getElementById('daily-timer');
+            if (!timerEl) return clearInterval(window.dailyTimerInterval);
+            
+            const now = new Date();
+            const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+            const diff = tomorrow - now;
+            
+            if (diff <= 0) {
+                timerEl.textContent = '00:00:00';
+                clearInterval(window.dailyTimerInterval);
+                setTimeout(() => location.reload(), 2000);
+                return;
+            }
+            
+            const h = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2, '0');
+            const m = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2, '0');
+            const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+            timerEl.textContent = `${h}:${m}:${s}`;
+        };
+        
+        if (window.dailyTimerInterval) clearInterval(window.dailyTimerInterval);
+        updateTimer();
+        window.dailyTimerInterval = setInterval(updateTimer, 1000);
     }
 };
 
@@ -177,7 +209,7 @@ export const applyTranslations = () => {
 
 export const applySettings = () => {
     document.body.classList.toggle('light-theme', state.settings.theme === 'light');
-    setupTableHeaders(); 
+    setupTableHeaders();
     applyTranslations();
 };
 

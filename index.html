@@ -23,9 +23,11 @@
     <header class="app-header">
         <div class="header-content">
             <div class="header-left">
+                <button class="icon-btn" title="Home" id="home-btn"
+                    style="display:none; font-size:1.4rem; margin-right:8px;">🏠</button>
                 <button class="icon-btn" title="Stats" id="stats-btn">📊</button>
             </div>
-            <nav class="mode-nav" id="mode-nav">
+            <nav class="mode-nav" id="mode-nav" style="display:none">
                 <button class="mode-btn active" data-mode="classic">Classic</button>
                 <button class="mode-btn" data-mode="support">Support</button>
                 <button class="mode-btn" data-mode="splash">Splash</button>
@@ -38,7 +40,43 @@
         </div>
     </header>
 
-    <div class="wrap">
+    <div id="hub-container" class="hub-container">
+        <h2 class="hub-title" data-i18n="hub_title">CHOOSE YOUR CHALLENGE</h2>
+        <p class="hub-subtitle" data-i18n="hub_sub">Test your Uma Musume knowledge in different ways!</p>
+        <div class="modes-grid">
+            <div class="mode-card" data-mode="classic">
+                <div class="mode-icon">🏇</div>
+                <div class="mode-title" data-i18n="m_classic_t">Classic</div>
+                <div class="mode-desc" data-i18n="m_classic_d">Guess the Uma Musume by finding the correct attributes.
+                </div>
+            </div>
+            <div class="mode-card" data-mode="splash">
+                <div class="mode-icon">🖼️</div>
+                <div class="mode-title" data-i18n="m_splash_t">Splash</div>
+                <div class="mode-desc" data-i18n="m_splash_d">Guess the character from a gradually zooming out splash
+                    art.</div>
+            </div>
+            <div class="mode-card" data-mode="support">
+                <div class="mode-icon">🃏</div>
+                <div class="mode-title" data-i18n="m_support_t">Support Card</div>
+                <div class="mode-desc" data-i18n="m_support_d">Guess the support card by its rarity, type, and
+                    character.</div>
+            </div>
+            <div class="mode-card" data-mode="quote">
+                <div class="mode-icon">🗣️</div>
+                <div class="mode-title" data-i18n="m_quote_t">Quote</div>
+                <div class="mode-desc" data-i18n="m_quote_d">Guess who said the famous voice line or catchphrase.</div>
+            </div>
+            <div class="mode-card" data-mode="emoji">
+                <div class="mode-icon">🧩</div>
+                <div class="mode-title" data-i18n="m_emoji_t">Emoji</div>
+                <div class="mode-desc" data-i18n="m_emoji_d">Decode a sequence of emojis to find the right character.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap" id="game-container" style="display:none">
         <h1>UMADLE</h1>
         <div class="sub">Uma Musume - Pretty Derby</div>
         <div class="divider"></div>
@@ -52,13 +90,16 @@
         </div>
 
         <!-- Container de Splash (Arte) do Modo Específico -->
-        <div id="splash-container" style="display:none; width: 260px; height: 260px; margin: 0 auto 24px; overflow: hidden; border-radius: 12px; border: 2px solid var(--input-border); position: relative; background: #000;">
-            <img id="splash-img" src="" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);">
+        <div id="splash-container"
+            style="display:none; width: 260px; height: 260px; margin: 0 auto 24px; overflow: hidden; border-radius: 12px; border: 2px solid var(--input-border); position: relative; background: #000;">
+            <img id="splash-img" src=""
+                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);">
         </div>
 
         <!-- Container principal de input -->
         <div class="search-wrapper">
-            <input id="search-input" data-i18n-ph="placeholder" placeholder="Type an Uma Musume's name..." autocomplete="off">
+            <input id="search-input" data-i18n-ph="placeholder" placeholder="Type an Uma Musume's name..."
+                autocomplete="off">
             <button class="search-btn" id="search-btn" aria-label="Search">&#128269;</button>
             <div class="dropdown" id="dropdown-menu" style="display:none"></div>
         </div>
@@ -134,7 +175,8 @@
                     <div class="stat-label" data-i18n="stat_maxstreak">Max Streak</div>
                 </div>
             </div>
-            <h3 style="font-size: 0.9rem; margin-bottom: 15px; color: var(--gold); text-align: center; letter-spacing: 1px;" data-i18n="stat_dist">GUESS DISTRIBUTION</h3>
+            <h3 style="font-size: 0.9rem; margin-bottom: 15px; color: var(--gold); text-align: center; letter-spacing: 1px;"
+                data-i18n="stat_dist">GUESS DISTRIBUTION</h3>
             <div class="stats-dist" id="stats-dist">
                 <!-- Barras construídas via JS -->
             </div>
@@ -146,7 +188,7 @@
         <div class="modal-content" style="max-width: 320px;">
             <button class="modal-close" id="settings-close">&times;</button>
             <h2 data-i18n="settings_title">SETTINGS</h2>
-            
+
             <div class="settings-group">
                 <div class="setting-item">
                     <label for="theme-select" data-i18n="set_theme">Theme</label>
@@ -155,7 +197,7 @@
                         <option value="light" data-i18n="set_light">Light</option>
                     </select>
                 </div>
-                
+
                 <div class="setting-item">
                     <label for="lang-select" data-i18n="set_lang">Language</label>
                     <select id="lang-select" class="setting-select">
@@ -163,7 +205,7 @@
                         <option value="pt-br">Português (BR)</option>
                     </select>
                 </div>
-                
+
                 <div class="setting-item">
                     <label for="mute-toggle" data-i18n="set_mute">Mute Sounds</label>
                     <label class="switch">

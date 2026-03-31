@@ -4,6 +4,17 @@ import { getStorageKey, saveProgress, updateStats } from './storage.js';
 import { DOM, setupTableHeaders, updateSplashZoom, updateCounter, renderRow, renderResultBox, showStatsModal, showToast, updateHints } from './ui.js';
 
 export const loadModeConfig = async () => {
+    if (state.currentMode === 'hub') {
+        DOM.hubContainer.style.display = 'block';
+        DOM.gameContainer.style.display = 'none';
+        DOM.homeBtn.style.display = 'none';
+        return;
+    }
+
+    DOM.hubContainer.style.display = 'none';
+    DOM.gameContainer.style.display = 'block';
+    DOM.homeBtn.style.display = 'inline-block';
+
     const config = MODE_CONFIGS[state.currentMode];
     state.COLUMNS = config.columns;
 
@@ -41,6 +52,10 @@ export const initGame = () => {
     if (state.currentMode === 'emoji') {
         DOM.modeHint.style.display = 'block';
         DOM.modeHint.textContent = state.answer.emojis;
+        DOM.splashContainer.style.display = 'none';
+    } else if (state.currentMode === 'quote') {
+        DOM.modeHint.style.display = 'block';
+        DOM.modeHint.innerHTML = `<em style="font-size: 1.25rem;">"${state.answer.quote}"</em>`;
         DOM.splashContainer.style.display = 'none';
     } else if (state.currentMode === 'splash') {
         DOM.modeHint.style.display = 'none';

@@ -607,7 +607,8 @@ th {
     align-items: center;
     justify-content: flex-end;
     padding-right: 8px;
-    min-width: 8%; /* Espaço suficiente para o número não sumir */
+    min-width: 8%;
+    /* Espaço suficiente para o número não sumir */
     transition: width 0.5s ease-out;
 }
 
@@ -636,7 +637,8 @@ body.light-theme {
 }
 
 body.light-theme::before {
-    display: none; /* remove o "glow" roxo radial do fundo escuro */
+    display: none;
+    /* remove o "glow" roxo radial do fundo escuro */
 }
 
 /* Settings Modal Elements */
@@ -680,16 +682,19 @@ body.light-theme::before {
     height: 24px;
 }
 
-.switch input { 
-    opacity: 0; 
-    width: 0; 
-    height: 0; 
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: var(--wrong-bg);
     transition: .3s;
     border-radius: 24px;
@@ -698,21 +703,21 @@ body.light-theme::before {
 .slider:before {
     position: absolute;
     content: "";
-    height: 16px; 
+    height: 16px;
     width: 16px;
-    left: 4px; 
+    left: 4px;
     bottom: 4px;
     background-color: #fff;
     transition: .3s;
     border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background: var(--btn-gradient);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(20px);
 }
 
@@ -735,7 +740,7 @@ input:checked + .slider:before {
     color: var(--text-muted);
     text-align: center;
     transition: all 0.3s ease;
-    white-space: pre-wrap; 
+    white-space: pre-wrap;
 }
 
 .hint-box.unlocked {
@@ -749,4 +754,118 @@ input:checked + .slider:before {
     font-size: 1.2rem;
     margin-right: 6px;
     vertical-align: middle;
+}
+
+/* Hub Styles */
+.hub-container {
+    padding: 24px 12px 60px;
+    max-width: 900px;
+    margin: 20px auto 0;
+    text-align: center;
+    animation: flip 0.4s ease;
+}
+
+.hub-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--gold);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.hub-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+}
+
+.modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.mode-card {
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--btn-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mode-card:hover:not(.disabled) {
+    transform: translateY(-5px);
+    border-color: var(--input-focus);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    background: var(--dropdown-hover);
+}
+
+.mode-card:hover:not(.disabled)::before {
+    opacity: 1;
+}
+
+.mode-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.mode-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.mode-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.mode-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--wrong-bg);
+    border-color: var(--wrong-dot);
+}
+
+.mode-card.disabled .mode-title {
+    color: var(--text-muted);
+}
+
+.soon-badge {
+    position: absolute;
+    top: 16px;
+    right: -30px;
+    background: #e74c3c;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 34px;
+    transform: rotate(45deg);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
