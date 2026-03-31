@@ -66,13 +66,12 @@ export default async function handler(req, res) {
     await db.execute('DELETE FROM splash');
     await db.execute('DELETE FROM support_cards');
 
-    // 3. Ler Arquivos Locais (Como o Node roda no folder /api/, as pastas são parentes)
-    const readLocal = (file) => JSON.parse(fs.readFileSync(path.join(__dirname, '..', file), 'utf-8'));
-    
-    const emojisDb = readLocal('database_emojis.json');
-    const quotesDb = readLocal('database_quotes.json');
-    const splashDb = readLocal('database_splash.json');
-    const supportDb = readLocal('support_cards.json');
+    // 3. Ler Arquivos Locais com Padrão Vercel
+    // Usamos caminhos literais com process.cwd() para o Vercel saber que precisa "empacotar" esses arquivos na nuvem.
+    const emojisDb = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'database_emojis.json'), 'utf-8'));
+    const quotesDb = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'database_quotes.json'), 'utf-8'));
+    const splashDb = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'database_splash.json'), 'utf-8'));
+    const supportDb = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'support_cards.json'), 'utf-8'));
 
     // 4. Inserir Tudo
     let cEmojis = 0, cQuotes = 0, cSplash = 0, cSupport = 0;
