@@ -540,7 +540,8 @@
                                 <label>Tipo de Pista</label>
                                 <div class="custom-select" id="type-wrapper">
                                     <div class="select-box" id="type-box">
-                                        <div class="tags" id="type-tags"><span class="placeholder">Selecione...</span></div>
+                                        <div class="tags" id="type-tags"><span class="placeholder">Selecione...</span>
+                                        </div>
                                         <span class="caret">▼</span>
                                     </div>
                                     <div class="dropdown-menu" id="type-menu">
@@ -555,7 +556,8 @@
                                 <label>Distância</label>
                                 <div class="custom-select" id="distance-wrapper">
                                     <div class="select-box" id="distance-box">
-                                        <div class="tags" id="distance-tags"><span class="placeholder">Selecione...</span>
+                                        <div class="tags" id="distance-tags"><span
+                                                class="placeholder">Selecione...</span>
                                         </div>
                                         <span class="caret">▼</span>
                                     </div>
@@ -595,8 +597,8 @@
                                     placeholder="4"></div>
                             <div class="form-group"><label>Ano Nasc.</label><input type="number" id="birthYear" required
                                     placeholder="1995"></div>
-                            <div class="form-group"><label>Lançamento</label><input type="number" id="releaseYear" required
-                                    placeholder="2021"></div>
+                            <div class="form-group"><label>Lançamento</label><input type="number" id="releaseYear"
+                                    required placeholder="2021"></div>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 1.25rem;">
@@ -650,15 +652,19 @@
                         </div>
                         <div style="display: flex; gap: 0.75rem;">
                             <button type="submit" class="btn-success" id="emoji-submit-btn">✨ Adicionar Emoji</button>
-                            <button type="button" class="btn-cancel" id="emoji-cancel-btn" style="display:none;" onclick="cancelModeEdit('emojis')">Cancelar</button>
+                            <button type="button" class="btn-cancel" id="emoji-cancel-btn" style="display:none;"
+                                onclick="cancelModeEdit('emojis')">Cancelar</button>
                         </div>
                     </form>
-                    <div id="emoji-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
+                    <div id="emoji-feedback"
+                        style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
                 </div>
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <h2 style="margin: 0;">Lista de Emojis</h2>
-                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="emojis-count">0</span>
+                        <span
+                            style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);"
+                            id="emojis-count">0</span>
                     </div>
                     <div class="mode-items-list" id="emojis-list">Carregando...</div>
                 </div>
@@ -679,20 +685,25 @@
                             </div>
                             <div class="form-group">
                                 <label>Frase / Citação</label>
-                                <textarea id="quote-quote" required placeholder="Ex: Piiiiiisss! It's me, Gold Ship!"></textarea>
+                                <textarea id="quote-quote" required
+                                    placeholder="Ex: Piiiiiisss! It's me, Gold Ship!"></textarea>
                             </div>
                         </div>
                         <div style="display: flex; gap: 0.75rem;">
                             <button type="submit" class="btn-success" id="quote-submit-btn">✨ Adicionar Fala</button>
-                            <button type="button" class="btn-cancel" id="quote-cancel-btn" style="display:none;" onclick="cancelModeEdit('quotes')">Cancelar</button>
+                            <button type="button" class="btn-cancel" id="quote-cancel-btn" style="display:none;"
+                                onclick="cancelModeEdit('quotes')">Cancelar</button>
                         </div>
                     </form>
-                    <div id="quote-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
+                    <div id="quote-feedback"
+                        style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
                 </div>
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <h2 style="margin: 0;">Lista de Falas</h2>
-                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="quotes-count">0</span>
+                        <span
+                            style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);"
+                            id="quotes-count">0</span>
                     </div>
                     <div class="mode-items-list" id="quotes-list">Carregando...</div>
                 </div>
@@ -732,15 +743,19 @@
                         </div>
                         <div style="display: flex; gap: 0.75rem;">
                             <button type="submit" class="btn-success" id="splash-submit-btn">✨ Adicionar Splash</button>
-                            <button type="button" class="btn-cancel" id="splash-cancel-btn" style="display:none;" onclick="cancelModeEdit('splash')">Cancelar</button>
+                            <button type="button" class="btn-cancel" id="splash-cancel-btn" style="display:none;"
+                                onclick="cancelModeEdit('splash')">Cancelar</button>
                         </div>
                     </form>
-                    <div id="splash-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
+                    <div id="splash-feedback"
+                        style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
                 </div>
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <h2 style="margin: 0;">Lista de Splash Arts</h2>
-                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="splash-count">0</span>
+                        <span
+                            style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);"
+                            id="splash-count">0</span>
                     </div>
                     <div class="mode-items-list" id="splash-list">Carregando...</div>
                 </div>
@@ -757,7 +772,8 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Nome da Carta</label>
-                                <input type="text" id="support-name" required placeholder="Ex: [A Promise] Special Week">
+                                <input type="text" id="support-name" required
+                                    placeholder="Ex: [A Promise] Special Week">
                             </div>
                             <div class="form-group">
                                 <label>URL da Imagem</label>
@@ -786,8 +802,8 @@
                                     <option value="Stamina">Stamina</option>
                                     <option value="Power">Power</option>
                                     <option value="Guts">Guts</option>
-                                    <option value="Intelligence">Intelligence</option>
-                                    <option value="Friend">Friend</option>
+                                    <option value="Wit">Wit</option>
+                                    <option value="Friendship">Friendship</option>
                                     <option value="Group">Group</option>
                                 </select>
                             </div>
@@ -798,19 +814,24 @@
                         </div>
                         <div class="form-group" style="margin-bottom: 1.25rem;">
                             <label>Efeito Único</label>
-                            <textarea id="support-uniqueEffect" required placeholder="Ex: Aumenta o Training Effect em 10%"></textarea>
+                            <textarea id="support-uniqueEffect" required
+                                placeholder="Ex: Aumenta o Training Effect em 10%"></textarea>
                         </div>
                         <div style="display: flex; gap: 0.75rem;">
                             <button type="submit" class="btn-success" id="support-submit-btn">✨ Adicionar Carta</button>
-                            <button type="button" class="btn-cancel" id="support-cancel-btn" style="display:none;" onclick="cancelModeEdit('support_cards')">Cancelar</button>
+                            <button type="button" class="btn-cancel" id="support-cancel-btn" style="display:none;"
+                                onclick="cancelModeEdit('support_cards')">Cancelar</button>
                         </div>
                     </form>
-                    <div id="support-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
+                    <div id="support-feedback"
+                        style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
                 </div>
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <h2 style="margin: 0;">Lista de Cartas</h2>
-                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="support_cards-count">0</span>
+                        <span
+                            style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);"
+                            id="support_cards-count">0</span>
                     </div>
                     <div class="mode-items-list" id="support_cards-list">Carregando...</div>
                 </div>
