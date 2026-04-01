@@ -370,6 +370,123 @@
             margin-left: 0.5rem;
             text-transform: uppercase;
         }
+
+        /* ─── Admin Tab Navigation ─── */
+        .admin-tabs {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0;
+            overflow-x: auto;
+        }
+
+        .admin-tab {
+            padding: 0.7rem 1.1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .admin-tab:hover {
+            color: var(--text);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .admin-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* ─── Generic Mode Items List ─── */
+        .mode-item-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.85rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .mode-item-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .mode-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mode-item-info h3 {
+            margin: 0 0 0.2rem 0;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .mode-item-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .mode-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .mode-item-actions {
+            display: flex;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .mode-item-actions button {
+            padding: 0.35rem 0.6rem;
+            font-size: 0.78rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--ring);
+        }
     </style>
 </head>
 
@@ -388,116 +505,317 @@
         </div>
 
         <div id="admin-section">
-            <div class="card" id="form-container">
-                <h1>Painel de Controle <span id="edit-mode-badge">MODO EDIÇÃO</span></h1>
+            <!-- ─── Barra de Abas ─── -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="characters">🐎 Personagens</button>
+                <button class="admin-tab" data-tab="emojis">🧩 Emojis</button>
+                <button class="admin-tab" data-tab="quotes">🗣️ Falas</button>
+                <button class="admin-tab" data-tab="splash">🖼️ Splash</button>
+                <button class="admin-tab" data-tab="support_cards">🃏 Suporte</button>
+            </div>
 
-                <form id="add-form">
-                    <input type="hidden" id="originalName" value="">
+            <!-- ═══════════════════════════════════ -->
+            <!-- ABA: Personagens (Original Intacto) -->
+            <!-- ═══════════════════════════════════ -->
+            <div class="tab-panel active" id="tab-characters">
+                <div class="card" id="form-container">
+                    <h1>Painel de Controle <span id="edit-mode-badge">MODO EDIÇÃO</span></h1>
 
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Nome (Inglês Oficial)</label>
-                            <input type="text" id="name" required placeholder="Ex: Special Week">
-                        </div>
-                        <div class="form-group">
-                            <label>URL da Imagem (Ícone)</label>
-                            <input type="url" id="imageUrl" required placeholder="https://...">
-                        </div>
-                    </div>
+                    <form id="add-form">
+                        <input type="hidden" id="originalName" value="">
 
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Tipo de Pista</label>
-                            <div class="custom-select" id="type-wrapper">
-                                <div class="select-box" id="type-box">
-                                    <div class="tags" id="type-tags"><span class="placeholder">Selecione...</span></div>
-                                    <span class="caret">▼</span>
-                                </div>
-                                <div class="dropdown-menu" id="type-menu">
-                                    <div class="option" data-val="Turf">Turf</div>
-                                    <div class="option" data-val="Dirt">Dirt</div>
-                                </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nome (Inglês Oficial)</label>
+                                <input type="text" id="name" required placeholder="Ex: Special Week">
                             </div>
-                            <input type="hidden" id="type" required>
+                            <div class="form-group">
+                                <label>URL da Imagem (Ícone)</label>
+                                <input type="url" id="imageUrl" required placeholder="https://...">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Distância</label>
-                            <div class="custom-select" id="distance-wrapper">
-                                <div class="select-box" id="distance-box">
-                                    <div class="tags" id="distance-tags"><span class="placeholder">Selecione...</span>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Tipo de Pista</label>
+                                <div class="custom-select" id="type-wrapper">
+                                    <div class="select-box" id="type-box">
+                                        <div class="tags" id="type-tags"><span class="placeholder">Selecione...</span></div>
+                                        <span class="caret">▼</span>
                                     </div>
-                                    <span class="caret">▼</span>
-                                </div>
-                                <div class="dropdown-menu" id="distance-menu">
-                                    <div class="option" data-val="Sprint">Sprint</div>
-                                    <div class="option" data-val="Mile">Mile</div>
-                                    <div class="option" data-val="Medium">Medium</div>
-                                    <div class="option" data-val="Long">Long</div>
-                                </div>
-                            </div>
-                            <input type="hidden" id="distance" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Estratégia (Style)</label>
-                            <div class="custom-select" id="style-wrapper">
-                                <div class="select-box" id="style-box">
-                                    <div class="tags" id="style-tags"><span class="placeholder">Selecione...</span>
+                                    <div class="dropdown-menu" id="type-menu">
+                                        <div class="option" data-val="Turf">Turf</div>
+                                        <div class="option" data-val="Dirt">Dirt</div>
                                     </div>
-                                    <span class="caret">▼</span>
                                 </div>
-                                <div class="dropdown-menu" id="style-menu">
-                                    <div class="option" data-val="Front Runner">Front Runner</div>
-                                    <div class="option" data-val="Pace Chaser">Pace Chaser</div>
-                                    <div class="option" data-val="Late Surger">Late Surger</div>
-                                    <div class="option" data-val="End Closer">End Closer</div>
-                                </div>
+                                <input type="hidden" id="type" required>
                             </div>
-                            <input type="hidden" id="style" required>
+
+                            <div class="form-group">
+                                <label>Distância</label>
+                                <div class="custom-select" id="distance-wrapper">
+                                    <div class="select-box" id="distance-box">
+                                        <div class="tags" id="distance-tags"><span class="placeholder">Selecione...</span>
+                                        </div>
+                                        <span class="caret">▼</span>
+                                    </div>
+                                    <div class="dropdown-menu" id="distance-menu">
+                                        <div class="option" data-val="Sprint">Sprint</div>
+                                        <div class="option" data-val="Mile">Mile</div>
+                                        <div class="option" data-val="Medium">Medium</div>
+                                        <div class="option" data-val="Long">Long</div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="distance" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Estratégia (Style)</label>
+                                <div class="custom-select" id="style-wrapper">
+                                    <div class="select-box" id="style-box">
+                                        <div class="tags" id="style-tags"><span class="placeholder">Selecione...</span>
+                                        </div>
+                                        <span class="caret">▼</span>
+                                    </div>
+                                    <div class="dropdown-menu" id="style-menu">
+                                        <div class="option" data-val="Front Runner">Front Runner</div>
+                                        <div class="option" data-val="Pace Chaser">Pace Chaser</div>
+                                        <div class="option" data-val="Late Surger">Late Surger</div>
+                                        <div class="option" data-val="End Closer">End Closer</div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="style" required>
+                            </div>
                         </div>
+
+                        <div class="form-grid" style="grid-template-columns: repeat(4, 1fr);">
+                            <div class="form-group"><label>Altura (cm)</label><input type="number" id="height" required
+                                    placeholder="158"></div>
+                            <div class="form-group"><label>Vitórias G1</label><input type="number" id="g1Wins" required
+                                    placeholder="4"></div>
+                            <div class="form-group"><label>Ano Nasc.</label><input type="number" id="birthYear" required
+                                    placeholder="1995"></div>
+                            <div class="form-group"><label>Lançamento</label><input type="number" id="releaseYear" required
+                                    placeholder="2021"></div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 1.25rem;">
+                            <label>Cor do Ícone (Hex)</label>
+                            <input type="color" id="dotColor" value="#8b5cf6" required style="max-width: 150px;">
+                        </div>
+
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button type="submit" id="submit-btn" class="btn-success">✨ Adicionar Personagem</button>
+                            <button type="button" id="cancel-btn" class="btn-cancel" style="display:none;"
+                                onclick="cancelEdit()">Cancelar Edição</button>
+                        </div>
+                    </form>
+                    <div id="feedback"
+                        style="min-height: 20px; text-align: left; margin-top: 1rem; font-size: 0.875rem; font-weight: 500;">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="margin: 0;">Garotas na Pista</h2>
+                        <span
+                            style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);"
+                            id="char-count">0</span>
                     </div>
 
-                    <div class="form-grid" style="grid-template-columns: repeat(4, 1fr);">
-                        <div class="form-group"><label>Altura (cm)</label><input type="number" id="height" required
-                                placeholder="158"></div>
-                        <div class="form-group"><label>Vitórias G1</label><input type="number" id="g1Wins" required
-                                placeholder="4"></div>
-                        <div class="form-group"><label>Ano Nasc.</label><input type="number" id="birthYear" required
-                                placeholder="1995"></div>
-                        <div class="form-group"><label>Lançamento</label><input type="number" id="releaseYear" required
-                                placeholder="2021"></div>
+                    <div class="character-grid" id="character-list">
+                        <div style="color: var(--text-muted); grid-column: 1/-1; padding: 2rem; text-align: center;">
+                            Carregando banco de dados...</div>
                     </div>
-
-                    <div class="form-group" style="margin-bottom: 1.25rem;">
-                        <label>Cor do Ícone (Hex)</label>
-                        <input type="color" id="dotColor" value="#8b5cf6" required style="max-width: 150px;">
-                    </div>
-
-                    <div style="display: flex; gap: 0.75rem;">
-                        <button type="submit" id="submit-btn" class="btn-success">✨ Adicionar Personagem</button>
-                        <button type="button" id="cancel-btn" class="btn-cancel" style="display:none;"
-                            onclick="cancelEdit()">Cancelar Edição</button>
-                    </div>
-                </form>
-                <div id="feedback"
-                    style="min-height: 20px; text-align: left; margin-top: 1rem; font-size: 0.875rem; font-weight: 500;">
                 </div>
             </div>
 
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h2 style="margin: 0;">Garotas na Pista</h2>
-                    <span
-                        style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);"
-                        id="char-count">0</span>
+            <!-- ═══════════════════════ -->
+            <!-- ABA: Emojis            -->
+            <!-- ═══════════════════════ -->
+            <div class="tab-panel" id="tab-emojis">
+                <div class="card">
+                    <h1>🧩 Gerenciar Emojis</h1>
+                    <form id="emoji-form">
+                        <input type="hidden" id="emoji-edit-id" value="">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nome da Personagem</label>
+                                <input type="text" id="emoji-name" required placeholder="Ex: Tokai Teio">
+                            </div>
+                            <div class="form-group">
+                                <label>Sequência de Emojis</label>
+                                <input type="text" id="emoji-emojis" required placeholder="Ex: 🎵🍯👑🐴">
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button type="submit" class="btn-success" id="emoji-submit-btn">✨ Adicionar Emoji</button>
+                            <button type="button" class="btn-cancel" id="emoji-cancel-btn" style="display:none;" onclick="cancelModeEdit('emojis')">Cancelar</button>
+                        </div>
+                    </form>
+                    <div id="emoji-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
                 </div>
-
-                <div class="character-grid" id="character-list">
-                    <div style="color: var(--text-muted); grid-column: 1/-1; padding: 2rem; text-align: center;">
-                        Carregando banco de dados...</div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="margin: 0;">Lista de Emojis</h2>
+                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="emojis-count">0</span>
+                    </div>
+                    <div class="mode-items-list" id="emojis-list">Carregando...</div>
                 </div>
             </div>
+
+            <!-- ═══════════════════════ -->
+            <!-- ABA: Falas (Quotes)    -->
+            <!-- ═══════════════════════ -->
+            <div class="tab-panel" id="tab-quotes">
+                <div class="card">
+                    <h1>🗣️ Gerenciar Falas</h1>
+                    <form id="quote-form">
+                        <input type="hidden" id="quote-edit-id" value="">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nome da Personagem</label>
+                                <input type="text" id="quote-name" required placeholder="Ex: Gold Ship">
+                            </div>
+                            <div class="form-group">
+                                <label>Frase / Citação</label>
+                                <textarea id="quote-quote" required placeholder="Ex: Piiiiiisss! It's me, Gold Ship!"></textarea>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button type="submit" class="btn-success" id="quote-submit-btn">✨ Adicionar Fala</button>
+                            <button type="button" class="btn-cancel" id="quote-cancel-btn" style="display:none;" onclick="cancelModeEdit('quotes')">Cancelar</button>
+                        </div>
+                    </form>
+                    <div id="quote-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
+                </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="margin: 0;">Lista de Falas</h2>
+                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="quotes-count">0</span>
+                    </div>
+                    <div class="mode-items-list" id="quotes-list">Carregando...</div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════ -->
+            <!-- ABA: Splash            -->
+            <!-- ═══════════════════════ -->
+            <div class="tab-panel" id="tab-splash">
+                <div class="card">
+                    <h1>🖼️ Gerenciar Splash Arts</h1>
+                    <form id="splash-form">
+                        <input type="hidden" id="splash-edit-id" value="">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nome da Personagem</label>
+                                <input type="text" id="splash-name" required placeholder="Ex: Silence Suzuka">
+                            </div>
+                            <div class="form-group">
+                                <label>URL da Splash Art</label>
+                                <input type="url" id="splash-splashUrl" required placeholder="https://...">
+                            </div>
+                        </div>
+                        <div class="form-grid" style="grid-template-columns: repeat(3, 1fr);">
+                            <div class="form-group">
+                                <label>Ponto Focal X (%)</label>
+                                <input type="number" id="splash-originX" placeholder="50" value="50">
+                            </div>
+                            <div class="form-group">
+                                <label>Ponto Focal Y (%)</label>
+                                <input type="number" id="splash-originY" placeholder="50" value="50">
+                            </div>
+                            <div class="form-group">
+                                <label>URL do Ícone</label>
+                                <input type="url" id="splash-imageUrl" placeholder="https://...">
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button type="submit" class="btn-success" id="splash-submit-btn">✨ Adicionar Splash</button>
+                            <button type="button" class="btn-cancel" id="splash-cancel-btn" style="display:none;" onclick="cancelModeEdit('splash')">Cancelar</button>
+                        </div>
+                    </form>
+                    <div id="splash-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
+                </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="margin: 0;">Lista de Splash Arts</h2>
+                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="splash-count">0</span>
+                    </div>
+                    <div class="mode-items-list" id="splash-list">Carregando...</div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════ -->
+            <!-- ABA: Cartas de Suporte         -->
+            <!-- ══════════════════════════════ -->
+            <div class="tab-panel" id="tab-support_cards">
+                <div class="card">
+                    <h1>🃏 Gerenciar Cartas de Suporte</h1>
+                    <form id="support-form">
+                        <input type="hidden" id="support-edit-id" value="">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nome da Carta</label>
+                                <input type="text" id="support-name" required placeholder="Ex: [A Promise] Special Week">
+                            </div>
+                            <div class="form-group">
+                                <label>URL da Imagem</label>
+                                <input type="url" id="support-imageUrl" required placeholder="https://...">
+                            </div>
+                        </div>
+                        <div class="form-grid" style="grid-template-columns: repeat(4, 1fr);">
+                            <div class="form-group">
+                                <label>Personagem</label>
+                                <input type="text" id="support-character" required placeholder="Ex: Special Week">
+                            </div>
+                            <div class="form-group">
+                                <label>Raridade</label>
+                                <select id="support-rarity" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="SSR">SSR</option>
+                                    <option value="SR">SR</option>
+                                    <option value="R">R</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo de Treino</label>
+                                <select id="support-type" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="Speed">Speed</option>
+                                    <option value="Stamina">Stamina</option>
+                                    <option value="Power">Power</option>
+                                    <option value="Guts">Guts</option>
+                                    <option value="Intelligence">Intelligence</option>
+                                    <option value="Friend">Friend</option>
+                                    <option value="Group">Group</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ano Lançamento</label>
+                                <input type="number" id="support-releaseYear" required placeholder="2021">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1.25rem;">
+                            <label>Efeito Único</label>
+                            <textarea id="support-uniqueEffect" required placeholder="Ex: Aumenta o Training Effect em 10%"></textarea>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button type="submit" class="btn-success" id="support-submit-btn">✨ Adicionar Carta</button>
+                            <button type="button" class="btn-cancel" id="support-cancel-btn" style="display:none;" onclick="cancelModeEdit('support_cards')">Cancelar</button>
+                        </div>
+                    </form>
+                    <div id="support-feedback" style="min-height: 20px; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500;"></div>
+                </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="margin: 0;">Lista de Cartas</h2>
+                        <span style="background: var(--border); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; font-size: 0.875rem; color: var(--text-muted);" id="support_cards-count">0</span>
+                    </div>
+                    <div class="mode-items-list" id="support_cards-list">Carregando...</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
